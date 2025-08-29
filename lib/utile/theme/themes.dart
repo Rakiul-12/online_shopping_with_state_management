@@ -1,0 +1,46 @@
+import 'package:flutter/material.dart';
+import 'package:online_shop/utile/const/colors.dart';
+import 'package:online_shop/utile/theme/widgets_theme/OutLineButtonTheme.dart';
+import 'package:online_shop/utile/theme/widgets_theme/appbar_theme.dart';
+import 'package:online_shop/utile/theme/widgets_theme/bottom_sheet_theme.dart';
+import 'package:online_shop/utile/theme/widgets_theme/checkBox_theme.dart';
+import 'package:online_shop/utile/theme/widgets_theme/chip_theme.dart';
+import 'package:online_shop/utile/theme/widgets_theme/elevatedButtonTheme.dart';
+import 'package:online_shop/utile/theme/widgets_theme/inputDecorationTheme.dart';
+import 'package:online_shop/utile/theme/widgets_theme/text_theme.dart';
+
+class Mytheme {
+  static ThemeData lightTheme = ThemeData(
+    useMaterial3: true,
+    fontFamily: "Nunito",
+    brightness: Brightness.light,
+    primaryColor: Mycolors.primary,
+    disabledColor: Mycolors.grey,
+    textTheme: MyText_theme.lightTextTheme,
+    chipTheme: MyChipTheme.lightChipTheme,
+    scaffoldBackgroundColor: Mycolors.white,
+    appBarTheme: MyAppBarTheme.lightAppBarTheme,
+    checkboxTheme: MyCheckboxTheme.lightCheckBoxTheme,
+    bottomSheetTheme: MyBottomSheetTheme.lightBottomSheetTheme,
+    elevatedButtonTheme: MyElevatedButtonTheme.lightElevatedButtonTheme,
+    outlinedButtonTheme: MyOutlineButtonTheme.lightOutlineButtonTheme,
+    inputDecorationTheme: MyInputDecorationTheme.lightInputDecorationTheme,
+  );
+
+  static ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
+    fontFamily: "Nunito",
+    brightness: Brightness.dark,
+    primaryColor: Mycolors.primary,
+    disabledColor: Mycolors.grey,
+    textTheme: MyText_theme.darkTextTheme,
+    chipTheme: MyChipTheme.darkChipTheme,
+    scaffoldBackgroundColor: Mycolors.black,
+    appBarTheme: MyAppBarTheme.darkAppBarTheme,
+    checkboxTheme: MyCheckboxTheme.darkCheckBoxTheme,
+    bottomSheetTheme: MyBottomSheetTheme.darkBottomSheetTheme,
+    elevatedButtonTheme: MyElevatedButtonTheme.darkElevatedButtonTheme,
+    outlinedButtonTheme: MyOutlineButtonTheme.darkOutlineButtonTheme,
+    inputDecorationTheme: MyInputDecorationTheme.darkInputDecorationTheme,
+  );
+}
