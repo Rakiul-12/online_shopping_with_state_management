@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/features/authentication/screens/forgetPass/forgotPassword.dart';
 import 'package:online_shop/features/authentication/screens/signUp/signUpScreen.dart';
+import 'package:online_shop/navigation_menu.dart';
 import '../../../../../common/widgets/Button/elevatedButton.dart';
 import '../../../../../utile/const/sizes.dart';
 import '../../../../../utile/const/text.dart';
@@ -53,7 +54,9 @@ class form_filed extends StatelessWidget {
 
         SizedBox(height: Mysize.spaceBtwInputFields),
 
-        MyElevatedButton(onPressed: () {}, child: Text(MyText.SignIn)),
+        MyElevatedButton(onPressed: () {
+          Get.to(()=>navigationMenuScreen());
+        }, child: Text(MyText.SignIn)),
         SizedBox(height: Mysize.spaceBtwItems),
         SizedBox(
           width: double.infinity,

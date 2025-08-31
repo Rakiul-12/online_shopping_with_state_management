@@ -54,4 +54,9 @@ class MyText{
   static const String accountCreateSubTitle = 'Congratulations! Your account has been successfully created. You can now explore all the amazing features, start personalizing your experience, and enjoy seamless access to our services. Let’s get started!';
   static const String verifyScreenResendBtn = 'Continue';
 
+
+  static const String HomeScreenAppBartitle = 'Good to see you!';
+  static const String HomeScreenAppBarsubtitle = "rakibulemon22@gmail.com";
+  static const String HomeScreenSearchBar = "Search in Store";
+
 }
