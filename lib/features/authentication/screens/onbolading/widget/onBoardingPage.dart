@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:online_shop/utile/const/sizes.dart';
 import '../../../../../utile/helpers/device_helper.dart';
 
 class onBoardingPage extends StatelessWidget {

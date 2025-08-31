@@ -5,4 +5,8 @@ class MyImage{
   static const String onboading2Animation = "assets/animations/cart.json";
   static const String onboading3Animation = "assets/animations/delivery.json";
 
+
+  static const String googleIcon = "assets/logo/google.png";
+  static const String facebookIcon = "assets/logo/facebook.png";
+
 }
