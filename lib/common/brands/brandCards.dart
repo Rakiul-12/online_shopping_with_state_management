@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+import '../../utile/const/enums.dart';
+import '../../utile/const/image.dart';
+import '../../utile/const/sizes.dart';
+import '../widgets/Images/roundedImage.dart';
+import '../widgets/custom_shapes/rounded_container.dart';
+import '../widgets/text/brandTitleWithVerifyIcon.dart';
+
+class MyBrandCard extends StatelessWidget {
+  const MyBrandCard({
+    super.key,
+    this.showBorder = true,
+  });
+
+  final bool showBorder;
+  @override
+  Widget build(BuildContext context) {
+    return MyRoundedContainer(
+      height: Mysize.brandCardHeight,
+      showBorder: showBorder,
+      padding: EdgeInsets.all(Mysize.sm),
+      backgroundColor: Colors.transparent,
+      child: Row(
+        children: [
+          Flexible(child: MyRoundedImge(imageUrl: MyImage.bataLogo,backgroundColor: Colors.transparent,)),
+
+          SizedBox(width: Mysize.spaceBtwItems /2,),
+
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                MyBrandTittleWithVerifyIcon(title: "Bata",brandTextSize: TextSize.large,),
+                Text("172 products",style: Theme.of(context).textTheme.labelMedium,overflow: TextOverflow.ellipsis,)
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

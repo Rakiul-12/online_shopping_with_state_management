@@ -25,13 +25,21 @@ class onBoadingScreen extends StatelessWidget {
             controller: controller.pageController,
             onPageChanged: controller.updatePageIndicator,
             children: [
-              onBoardingPage(animation:
-                MyImage.onboadingAnimation,
+              onBoardingPage(
+                animation: MyImage.onboadingAnimation,
                 title: MyText.onBoardingTitle1,
                 subtitle: MyText.onBoardingSubTitle1,
               ),
-              onBoardingPage(animation: MyImage.onboading2Animation,title: MyText.onBoardingTitle2,subtitle: MyText.onBoardingSubTitle2,),
-              onBoardingPage(animation: MyImage.onboading3Animation,title: MyText.onBoardingTitle3,subtitle: MyText.onBoardingSubTitle3,),
+              onBoardingPage(
+                animation: MyImage.onboading2Animation,
+                title: MyText.onBoardingTitle2,
+                subtitle: MyText.onBoardingSubTitle2,
+              ),
+              onBoardingPage(
+                animation: MyImage.onboading3Animation,
+                title: MyText.onBoardingTitle3,
+                subtitle: MyText.onBoardingSubTitle3,
+              ),
             ],
           ),
 
@@ -39,8 +47,7 @@ class onBoadingScreen extends StatelessWidget {
 
           OnBoardingElevatedButton(),
 
-          OnBoadingSkipButton()
-
+          OnBoadingSkipButton(),
         ],
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../common/widgets/AppBar/CustomAppbar.dart';
-import '../../../../../common/widgets/cart/cartCounterIcon.dart';
+import '../../../../../common/widgets/products/cart/cartCounterIcon.dart';
 import '../../../../../utile/const/colors.dart';
 import '../../../../../utile/const/text.dart';
 

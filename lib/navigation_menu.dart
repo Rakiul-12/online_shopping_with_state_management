@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/features/shop/screens/home/home_screen.dart';
-import 'package:online_shop/features/shop/screens/profile/profile_screen.dart';
 import 'package:online_shop/features/shop/screens/shop/shop_screen.dart';
 import 'package:online_shop/features/shop/screens/wishlist/wishlist_screen.dart';
 import 'package:online_shop/utile/const/colors.dart';
 import 'package:online_shop/utile/helpers/helper_functions.dart';
+import 'features/personalization/screen/profile/profile_screen.dart';
 
 class navigationMenuScreen extends StatelessWidget {
   const navigationMenuScreen({super.key});
@@ -39,6 +39,9 @@ class navigationMenuScreen extends StatelessWidget {
   }
 }
 class navigationController extends GetxController{
+
+  static navigationController get instance => Get.find();
+
   RxInt selectedIndex = 0.obs;
   List<Widget> Screens =[
     home_screen(),

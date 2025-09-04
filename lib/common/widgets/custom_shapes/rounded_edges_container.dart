@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:online_shop/common/widgets/custom_shapes/Clipper.dart';
+import 'package:online_shop/common/widgets/custom_shapes/clipper/Clipper.dart';
 
 class MyRoundedEdges extends StatelessWidget {
   const MyRoundedEdges({super.key, required this.child});

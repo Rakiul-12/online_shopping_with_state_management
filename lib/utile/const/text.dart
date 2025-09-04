@@ -58,5 +58,8 @@ class MyText{
   static const String HomeScreenAppBartitle = 'Good to see you!';
   static const String HomeScreenAppBarsubtitle = "rakibulemon22@gmail.com";
   static const String HomeScreenSearchBar = "Search in Store";
+  static const String HomeScreenPopularCategory = "Popular Category";
+  static const String HomeScreenPopularProduct = "Popular Products";
+  static const String HomeScreenPopularSeeAllProduct = "View all";
 
 }
