@@ -15,7 +15,7 @@ class onBoardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dark = MyHeplerFunction.isDarkMode(context);
+    final dark = MyHeplerFunction.isDarkMode(context);
     return Padding(
       padding: EdgeInsets.only(top: MyDeviceHelper.getAppBarHeight()),
       child: Column(

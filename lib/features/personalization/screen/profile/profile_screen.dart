@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
 import 'package:online_shop/features/personalization/screen/Address/UserAddress.dart';
+import 'package:online_shop/features/personalization/screen/Order/OrderScreen.dart';
 import 'package:online_shop/features/personalization/screen/profile/widgets/SettingMenuTile.dart';
 import 'package:online_shop/features/personalization/screen/profile/widgets/UserProfileTile.dart';
 import 'package:online_shop/features/personalization/screen/profile/widgets/profilePrimaryHeader.dart';
@@ -23,11 +24,8 @@ class profile_screen extends StatelessWidget {
               padding: const EdgeInsets.all(Mysize.defaultSpace),
               child: Column(
                 children: [
-
                   UserProfileTile(),
-
                   SizedBox(height: Mysize.spaceBtwItems,),
-
                   MySectionHeading(title: "Account Setting", showActionBtn: false,),
                   SettingMenuTile(
                     title: "My Address",
@@ -44,7 +42,7 @@ class profile_screen extends StatelessWidget {
                     title: "My Orders",
                     subtitle: "In-progress and Completed Orders",
                     icon: Iconsax.box,
-                    onPressed: () {  },
+                    onPressed: ()=>Get.to(()=>orderScreen()),
                   ),
                   SizedBox(height: Mysize.spaceBtwItems,),
                   SizedBox(
