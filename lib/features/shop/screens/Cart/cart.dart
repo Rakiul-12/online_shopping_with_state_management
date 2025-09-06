@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:online_shop/common/widgets/AppBar/CustomAppbar.dart';
 import 'package:online_shop/common/widgets/Button/elevatedButton.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
-import 'package:online_shop/common/widgets/text/product_price.dart';
+import 'package:online_shop/features/shop/screens/Cart/widgets/CartItems.dart';
 import 'package:online_shop/utile/const/sizes.dart';
-import '../../../../common/widgets/products/cart/MyProductQuantityAddAndRemove.dart';
-import '../../../../common/widgets/products/cart/cartItem.dart';
+
+import '../checkpOut/CheckOut.dart';
+
 
 class cartScreen extends StatelessWidget {
   const cartScreen({super.key});
@@ -19,35 +22,16 @@ class cartScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: MyPadding.screenPadding,
-        child: ListView.separated(
-          itemCount: 3,
-            itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  MyCardItem(),
-
-                  // price and counter item
-                  SizedBox(height: Mysize.spaceBtwItems,),
-                  Row(
-                    children: [
-                      SizedBox(width: 70,),
-                      MyProductQuantityAddAndRemove(),
-                      Spacer(),
-                      MyProductPriceText(price: "2000")
-                    ],
-                  )
-                ],
-              );
-            }, separatorBuilder: (context, index) =>SizedBox(height: Mysize.spaceBtwSections,),
-        ),
+        child: MyCardItems(),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(Mysize.defaultSpace),
-        child: MyElevatedButton(onPressed: (){}, child: Text("Checkout \$6000")),
+        child: MyElevatedButton(onPressed: ()=>Get.to(()=>checkOutScreen()), child: Text("Checkout \$6000")),
       ),
     );
   }
 }
+
 
 
 

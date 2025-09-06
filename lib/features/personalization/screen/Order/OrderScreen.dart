@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/common/widgets/AppBar/CustomAppbar.dart';
-import 'package:online_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
-import 'package:online_shop/utile/const/colors.dart';
+import 'package:online_shop/features/personalization/screen/Order/widgets/order_list.dart';
 
 class orderScreen extends StatelessWidget {
   const orderScreen({super.key});
@@ -18,33 +16,9 @@ class orderScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: MyPadding.screenPadding,
-          child: Column(
-            children: [
-              MyRoundedContainer(
-                showBorder: true,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Iconsax.shopping_bag),
-                        Column(
-                          children: [
-                            Text("Processing",style: Theme.of(context).textTheme.titleLarge!.apply(
-                              color: Mycolors.primary
-                            ),),
-                            Text("01 Jan 2025",style: Theme.of(context).textTheme.titleLarge,)
-                          ],
-                        ),
-                        IconButton(onPressed: (){}, icon: Icon(Iconsax.arrow_right_34))
-                      ],
-                    )
-                  ],
-                ),
-              )
-            ],
+          child: order_list()
           ),
         ),
-      ),
-    );
+      );
   }
 }

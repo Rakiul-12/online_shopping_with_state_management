@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:online_shop/features/shop/screens/SubCatagory/SubCatagory.dart';
 import 'package:online_shop/utile/const/image.dart';
 import '../../../../../common/widgets/Image_text/imge_text.dart';
 import '../../../../../utile/const/colors.dart';
@@ -34,6 +36,7 @@ class MyHomeCategory extends StatelessWidget {
                   title: "Sport Categories",
                   image: MyImage.bagsIcon,
                   textColor: Mycolors.white,
+                  onPressed: ()=>Get.to(()=>subCatagory()),
                 );
               },
             ),
