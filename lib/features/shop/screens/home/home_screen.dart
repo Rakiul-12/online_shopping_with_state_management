@@ -14,6 +14,7 @@ import '../../../../common/widgets/SearchBar/SearchBar.dart';
 import '../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../common/widgets/products/cart/product_card/product_cards_vertical.dart';
 import '../../../../common/widgets/text/sectionHeading.dart';
+import '../all_Products/AllProducts.dart';
 
 class home_screen extends StatelessWidget {
   const home_screen({super.key});
@@ -68,7 +69,7 @@ class home_screen extends StatelessWidget {
                    SizedBox(height: Mysize.md,),
                    MySectionHeading(
                      title: MyText.HomeScreenPopularProduct,
-                     onPressed: (){},
+                     onPressed: ()=> Get.to(()=>AllProdcuts()),
                    ),
                   SizedBox(height: Mysize.spaceBtwItems,),
 
