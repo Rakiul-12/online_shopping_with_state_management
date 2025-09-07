@@ -10,33 +10,39 @@ class MyBrandCard extends StatelessWidget {
   const MyBrandCard({
     super.key,
     this.showBorder = true,
+    this.onTap,
   });
 
   final bool showBorder;
+  final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context) {
-    return MyRoundedContainer(
-      height: Mysize.brandCardHeight,
-      showBorder: showBorder,
-      padding: EdgeInsets.all(Mysize.sm),
-      backgroundColor: Colors.transparent,
-      child: Row(
-        children: [
-          Flexible(child: MyRoundedImge(imageUrl: MyImage.bataLogo,backgroundColor: Colors.transparent,)),
+    return GestureDetector(
+      onTap: onTap,
+      child: MyRoundedContainer(
+        height: Mysize.brandCardHeight,
+        showBorder: showBorder,
+        padding: EdgeInsets.all(Mysize.sm),
+        backgroundColor: Colors.transparent,
+        child: Row(
+          children: [
+            Flexible(child: MyRoundedImge(imageUrl: MyImage.bataLogo,backgroundColor: Colors.transparent,)),
 
-          SizedBox(width: Mysize.spaceBtwItems /2,),
+            SizedBox(width: Mysize.spaceBtwItems /2,),
 
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                MyBrandTittleWithVerifyIcon(title: "Bata",brandTextSize: TextSize.large,),
-                Text("172 products",style: Theme.of(context).textTheme.labelMedium,overflow: TextOverflow.ellipsis,)
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  MyBrandTittleWithVerifyIcon(title: "Bata",brandTextSize: TextSize.large,),
+                  Text("172 products",style: Theme.of(context).textTheme.labelMedium,overflow: TextOverflow.ellipsis,)
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

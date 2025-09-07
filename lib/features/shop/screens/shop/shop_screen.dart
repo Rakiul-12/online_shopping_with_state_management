@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/catagoryTabs.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/store_primary_header.dart';
@@ -6,6 +8,7 @@ import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/helpers/helper_functions.dart';
 import '../../../../common/brands/brandCards.dart';
 import '../../../../common/widgets/TabBar/TabBar.dart';
+import '../Brands/AllBrands.dart';
 
 class shop_screen extends StatelessWidget {
   const shop_screen({super.key});
@@ -35,7 +38,7 @@ class shop_screen extends StatelessWidget {
                         ),
                         child: Column(
                           children: [
-                            MySectionHeading(title: "Brands", onPressed: () {}),
+                            MySectionHeading(title: "Brands", onPressed: ()=>Get.to(()=>Allbrands())),
 
                             SizedBox(
                               height: Mysize.brandCardHeight,
