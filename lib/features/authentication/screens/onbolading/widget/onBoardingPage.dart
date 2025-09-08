@@ -6,7 +6,10 @@ import '../../../../../utile/helpers/device_helper.dart';
 
 class onBoardingPage extends StatelessWidget {
   const onBoardingPage({
-    super.key, required this.animation, required this.title, required this.subtitle,
+    super.key,
+    required this.animation,
+    required this.title,
+    required this.subtitle,
   });
 
   final String animation;

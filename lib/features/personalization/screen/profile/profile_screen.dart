@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
+import 'package:online_shop/data/repository/authentication_repo.dart';
 import 'package:online_shop/features/personalization/screen/Address/UserAddress.dart';
 import 'package:online_shop/features/personalization/screen/Order/OrderScreen.dart';
 import 'package:online_shop/features/personalization/screen/profile/widgets/SettingMenuTile.dart';
@@ -48,7 +49,7 @@ class profile_screen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                        onPressed: (){},
+                        onPressed: authentication_repo.instance.logoutUser,
                         child: Text("Logout")
                     ),
                   ),

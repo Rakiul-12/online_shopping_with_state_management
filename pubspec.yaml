@@ -13,8 +13,10 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
+  #flutter_native_splash:
   flutter_native_splash: ^2.4.6
 
+  #lottie:
   lottie: ^3.3.1
 
   #smooth_page_indicator:
@@ -22,6 +24,9 @@ dependencies:
 
   #getX package :
   get: ^4.7.2
+
+  #get_storage:
+  get_storage: ^2.1.1
 
   #icons_launcher:
   iconsax: ^0.0.8
@@ -46,6 +51,12 @@ dependencies:
 
   #google_sign_in:
   google_sign_in: ^7.1.1
+
+  #http:
+  http: ^1.5.0
+
+  #connectivity_plus:
+  connectivity_plus: ^6.1.5
 
 
 

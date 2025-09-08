@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:online_shop/features/authentication/backend/logIn/login_controller.dart';
 import '../../../utile/const/colors.dart';
 import '../../../utile/const/sizes.dart';
 
@@ -9,10 +12,11 @@ class MySocialIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(loginController());
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        buildSocialButtonContainer("assets/logo/google.png", (){}),
+        buildSocialButtonContainer("assets/logo/google.png", controller.SignInWithGoogle),
         SizedBox(width: Mysize.spaceBtwItems,),
         buildSocialButtonContainer("assets/logo/facebook.png", (){}),
       ],

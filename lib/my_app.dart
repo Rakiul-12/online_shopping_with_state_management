@@ -3,6 +3,8 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:online_shop/features/authentication/screens/onbolading/onbolading.dart';
 import 'package:online_shop/utile/theme/themes.dart';
 
+import 'bindings/bindings.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -12,6 +14,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: Mytheme.lightTheme,
       darkTheme: Mytheme.darkTheme,
+      initialBinding: MyBindings(),
       home: onBoadingScreen(),
     );
   }
