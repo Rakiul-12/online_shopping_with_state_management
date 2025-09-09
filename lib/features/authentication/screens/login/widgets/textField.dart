@@ -5,7 +5,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/features/authentication/backend/logIn/login_controller.dart';
 import 'package:online_shop/features/authentication/screens/forgetPass/forgotPassword.dart';
 import 'package:online_shop/features/authentication/screens/signUp/signUpScreen.dart';
-import 'package:online_shop/navigation_menu.dart';
 import 'package:online_shop/utile/validators/validations.dart';
 import '../../../../../common/widgets/Button/elevatedButton.dart';
 import '../../../../../utile/const/sizes.dart';

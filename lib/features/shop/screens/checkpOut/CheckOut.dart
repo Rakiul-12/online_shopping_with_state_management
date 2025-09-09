@@ -13,7 +13,6 @@ import 'package:online_shop/features/shop/screens/checkpOut/widgets/MyPaymentBil
 import 'package:online_shop/navigation_menu.dart';
 import 'package:online_shop/utile/const/image.dart';
 import 'package:online_shop/utile/const/sizes.dart';
-import 'package:online_shop/utile/helpers/helper_functions.dart';
 
 import '../../../../common/widgets/textfield/MyPromoCodeField.dart';
 
@@ -22,7 +21,7 @@ class checkOutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = MyHeplerFunction.isDarkMode(context);
+    // final dark = MyHeplerFunction.isDarkMode(context);
     return Scaffold(
       appBar: MyAppbar(
         showBackArrow: true,

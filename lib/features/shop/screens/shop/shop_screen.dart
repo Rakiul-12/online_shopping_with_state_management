@@ -5,7 +5,6 @@ import 'package:online_shop/common/widgets/text/sectionHeading.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/catagoryTabs.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/store_primary_header.dart';
 import 'package:online_shop/utile/const/sizes.dart';
-import 'package:online_shop/utile/helpers/helper_functions.dart';
 import '../../../../common/brands/brandCards.dart';
 import '../../../../common/widgets/TabBar/TabBar.dart';
 import '../Brands/AllBrands.dart';
@@ -15,7 +14,7 @@ class shop_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = MyHeplerFunction.isDarkMode(context);
+    // final dark = MyHeplerFunction.isDarkMode(context);
     return DefaultTabController(
       length: 5,
       child: Scaffold(

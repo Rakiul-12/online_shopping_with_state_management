@@ -4,9 +4,9 @@ class MyImage{
 
 
   // onboarding animations
-  static const String onboadingAnimation = "assets/animations/welcome.json";
-  static const String onboading2Animation = "assets/animations/cart.json";
-  static const String onboading3Animation = "assets/animations/delivery.json";
+  static const String onboadingAnimation1 = "assets/animations/welcome.json";
+  static const String onboadingAnimation2 = "assets/animations/cart.json";
+  static const String onboadingAnimation3 = "assets/animations/delivery.json";
 
   // loading animation
   static const String loadingAnimation = "assets/animations/loading.json";

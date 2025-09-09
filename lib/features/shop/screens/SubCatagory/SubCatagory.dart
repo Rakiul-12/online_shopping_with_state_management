@@ -3,7 +3,6 @@ import 'package:online_shop/common/widgets/AppBar/CustomAppbar.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
 import 'package:online_shop/utile/const/sizes.dart';
-import 'package:online_shop/utile/helpers/helper_functions.dart';
 import '../../../../common/widgets/products/cart/product_card/ProductCartHorizontal.dart';
 
 class subCatagory extends StatelessWidget {
@@ -11,7 +10,7 @@ class subCatagory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = MyHeplerFunction.isDarkMode(context);
+    // final dark = MyHeplerFunction.isDarkMode(context);
     return Scaffold(
       appBar: MyAppbar(
         showBackArrow: true,

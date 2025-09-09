@@ -21,7 +21,7 @@ class home_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
+    Get.put(HomeController());
     bool dark = MyHeplerFunction.isDarkMode(context);
     return Scaffold(
       body: SingleChildScrollView(

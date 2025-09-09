@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -14,18 +13,20 @@ import 'package:online_shop/utile/exceptions/firebase_exceptions.dart';
 import 'package:online_shop/utile/exceptions/formate_exceptions.dart';
 import 'package:online_shop/utile/exceptions/platform_exceptions.dart';
 
+
 class authentication_repo extends GetxController {
   static authentication_repo get instance => Get.find();
 
   final Localstorage = GetStorage();
   final _auth = FirebaseAuth.instance;
 
+  User? get currentUser =>_auth.currentUser;
+
   @override
   void onReady() {
     FlutterNativeSplash.remove();
     screenRedirect();
   }
-
 
   // function to redirect to the right screen
   void screenRedirect() {
@@ -51,7 +52,7 @@ class authentication_repo extends GetxController {
 
   }
 
-  // Authentication --signIn with email and pass
+  // Authentication --signUp with email and pass and other information
   Future<UserCredential> registerUser(String email, String pass) async {
     try {
       UserCredential userCredential = await _auth
@@ -92,26 +93,32 @@ class authentication_repo extends GetxController {
 
 
   // Authentication --Sign in with google
-  // Future<UserCredential> signInWithGoogle() async {
-  //   try {
-  //
-  //     final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
-  //
-  //
-  //   }on FirebaseAuthException catch(e){
-  //     throw MyFirebaseAuthException(e.code).message;
-  //   }on FirebaseException catch(e){
-  //     throw MyFirebaseException(e.code).message;
-  //   }on FormatException catch(_){
-  //     throw MyFormatException();
-  //   }on PlatformException catch(e){
-  //     throw MyPlatformException(e.code).message;
-  //   }catch(e){
-  //     throw "Something went wrong.Please try again";
-  //   }
-  // }
+  Future<UserCredential> signInWithGoogle() async {
+    try {
 
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      final AuthCredential authCredential = GoogleAuthProvider.credential(
+        idToken: googleAuth?.idToken,
+        accessToken: googleAuth?.accessToken
+      );
+      UserCredential userCredential = await _auth.signInWithCredential(authCredential);
+      return userCredential;
+
+    }on FirebaseAuthException catch(e){
+      throw MyFirebaseAuthException(e.code).message;
+    }on FirebaseException catch(e){
+      throw MyFirebaseException(e.code).message;
+    }on FormatException catch(_){
+      throw MyFormatException();
+    }on PlatformException catch(e){
+      throw MyPlatformException(e.code).message;
+    }catch(e){
+      throw "Something went wrong.Please try again";
+    }
+  }
 
 
   // Email verification -sent email
@@ -136,6 +143,7 @@ class authentication_repo extends GetxController {
   Future<void> logoutUser() async {
     try{
       await FirebaseAuth.instance.signOut();
+      await GoogleSignIn().signOut();
       Get.offAll(() => logInScreen());
     }on FirebaseAuthException catch(e){
       throw MyFirebaseAuthException(e.code).message;
@@ -151,5 +159,21 @@ class authentication_repo extends GetxController {
   }
 
 
+  // Sent email to reset password
+  Future<void> sendEmailToRestPassword(String email) async {
+    try{
+      await _auth.sendPasswordResetEmail(email: email);
+    }on FirebaseAuthException catch(e){
+      throw MyFirebaseAuthException(e.code).message;
+    }on FirebaseException catch(e){
+      throw MyFirebaseException(e.code).message;
+    }on FormatException catch(_){
+      throw MyFormatException();
+    }on PlatformException catch(e){
+      throw MyPlatformException(e.code).message;
+    }catch(e){
+      throw "Something went wrong.Please try again";
+    }
+  }
 
 }

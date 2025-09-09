@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:online_shop/data/repository/authentication_repo.dart';
+import 'package:online_shop/features/personalization/controller/userController.dart';
 import 'package:online_shop/utile/const/keys.dart';
 import 'package:online_shop/utile/helpers/NetworkManager.dart';
 import 'package:online_shop/utile/popup/fullScreenLoader.dart';
@@ -21,6 +23,8 @@ class loginController extends GetxController{
     super.onInit();
   }
 
+
+  final _userController = Get.put(userController());
   final email = TextEditingController();
   final pass = TextEditingController();
   RxBool showPass = true.obs;
@@ -74,9 +78,25 @@ class loginController extends GetxController{
   // Sign in with google
   Future<void>SignInWithGoogle()async{
     try{
+      MyFullScreenLoader.openLoadingDialog("Logging you in...");
 
+      final isConnected = await NetworkManager.instance.isConnected();
+      if(!isConnected){
+        MyFullScreenLoader.stopLoading();
+        MySnackBarHelpers.warningSnackBar(title: "No Internet Connection");
+        return;
+      }
+
+      UserCredential userCredential = await authentication_repo.instance.signInWithGoogle();
+
+      // Save user record
+      await _userController.saveUserRecord(userCredential);
+      MyFullScreenLoader.stopLoading();
+
+      authentication_repo.instance.screenRedirect();
     }catch(e){
-
+      MyFullScreenLoader.stopLoading();
+      MySnackBarHelpers.errorSnackBar(title: "Login Failed",message: e.toString());
     }
 
   }

@@ -7,7 +7,6 @@ import 'package:online_shop/features/shop/screens/product_details/widgets/MyProd
 import 'package:online_shop/features/shop/screens/product_details/widgets/ProductAttributes.dart';
 import 'package:online_shop/features/shop/screens/product_details/widgets/bottom_add_to_cart.dart';
 import 'package:online_shop/utile/const/sizes.dart';
-import 'package:online_shop/utile/helpers/helper_functions.dart';
 import 'package:readmore/readmore.dart';
 
 class prodcut_details extends StatelessWidget {
@@ -15,7 +14,7 @@ class prodcut_details extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = MyHeplerFunction.isDarkMode(context);
+    // final dark = MyHeplerFunction.isDarkMode(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
