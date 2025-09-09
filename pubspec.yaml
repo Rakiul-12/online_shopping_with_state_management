@@ -58,7 +58,7 @@ dependencies:
   #connectivity_plus:
   connectivity_plus: ^6.1.5
 
-  #shimmer:
+  #shimmer:flj
   shimmer: ^3.0.0
 
 
