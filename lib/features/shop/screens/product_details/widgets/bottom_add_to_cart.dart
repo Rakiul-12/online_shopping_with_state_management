@@ -10,7 +10,7 @@ class addToCartSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dark = MyHeplerFunction.isDarkMode(context);
+    bool dark = MyHelperFunction.isDarkMode(context);
     return Container(
       decoration: BoxDecoration(
         color:  dark ? Mycolors.darkerGrey : Mycolors.light,

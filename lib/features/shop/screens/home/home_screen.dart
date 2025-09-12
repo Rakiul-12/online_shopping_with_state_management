@@ -22,7 +22,7 @@ class home_screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
-    bool dark = MyHeplerFunction.isDarkMode(context);
+    bool dark = MyHelperFunction.isDarkMode(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

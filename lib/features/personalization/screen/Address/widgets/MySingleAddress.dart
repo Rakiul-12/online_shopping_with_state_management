@@ -14,7 +14,7 @@ class MySingleAddress extends StatelessWidget {
   final bool isSelected;
   @override
   Widget build(BuildContext context) {
-    final dark = MyHeplerFunction.isDarkMode(context);
+    final dark = MyHelperFunction.isDarkMode(context);
     return MyRoundedContainer(
       width: double.infinity,
       borderColor: isSelected ? Colors.transparent : dark ?  Mycolors.darkGrey : Mycolors.grey,

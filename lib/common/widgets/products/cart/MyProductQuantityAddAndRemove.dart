@@ -13,7 +13,7 @@ class MyProductQuantityAddAndRemove extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = MyHeplerFunction.isDarkMode(context);
+    final dark = MyHelperFunction.isDarkMode(context);
     return Row(
       children: [
         MyCircularIcon(icon: Iconsax.minus,width: 32,height: 32,

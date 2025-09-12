@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/common/widgets/AppBar/CustomAppbar.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
+import 'package:online_shop/data/repository/authentication_repo.dart';
+import 'package:online_shop/features/authentication/screens/EditUserNameScreen/change_name.dart';
+import 'package:online_shop/features/personalization/controller/userController.dart';
 import 'package:online_shop/features/personalization/screen/editProfileScreen/widgets/UserProfileWithUserIcon.dart';
 import 'package:online_shop/utile/const/sizes.dart';
+import 'package:online_shop/utile/popup/fullScreenLoader.dart';
 
 class edit_profile extends StatelessWidget {
   const edit_profile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = userController.instance;
     return Scaffold(
       appBar: MyAppbar(
         showBackArrow: true,
@@ -31,12 +37,12 @@ class edit_profile extends StatelessWidget {
               MySectionHeading(title: "Account Settings",showActionBtn: false,),
               UserDetailRow(
                 title: "Name",
-                value: "Rakibul islam",
-                onPressed: () {},
+                value: controller.user.value.fullName,
+                onPressed: ()=> Get.to(()=>changeUserNameScreen()),
               ),
               UserDetailRow(
                 title: "Username",
-                value: "Rakibul_islam12",
+                value: controller.user.value.username,
                 onPressed: () {},
               ),
               SizedBox(height: Mysize.spaceBtwSections),
@@ -45,19 +51,19 @@ class edit_profile extends StatelessWidget {
               MySectionHeading(title: "Profile Settings",showActionBtn: false,),
               UserDetailRow(
                 title: "UserID",
-                value: "232345",
+                value: controller.user.value.id,
                 icon: Iconsax.copy,
                 onPressed: () {},
               ),
               UserDetailRow(
                 title: "Email",
-                value: "rakibulemon22@gmail.com",
+                value: controller.user.value.email,
                 icon: Iconsax.arrow_right_34,
                 onPressed: () {},
               ),
               UserDetailRow(
                 title: "Phone Number",
-                value: "01870457061",
+                value: controller.user.value.phoneNumber,
                 icon: Iconsax.arrow_right_34,
                 onPressed: () {},
               ),
@@ -65,13 +71,13 @@ class edit_profile extends StatelessWidget {
                 title: "Gender",
                 value: "Male",
                 icon: Iconsax.arrow_right_34,
-                onPressed: () {},
+                onPressed: (){},
               ),
               SizedBox(height: Mysize.spaceBtwSections),
               Divider(),
               SizedBox(height: Mysize.spaceBtwItems),
               TextButton(
-                onPressed: () {},
+                onPressed: controller.deleteAccountWarningPopup,
                 child: Text(
                   "Close account",
                   style: Theme.of(

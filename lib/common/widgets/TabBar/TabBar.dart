@@ -13,7 +13,7 @@ class MyCustonTabBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget> tabs;
   @override
   Widget build(BuildContext context) {
-    final dark = MyHeplerFunction.isDarkMode(context);
+    final dark = MyHelperFunction.isDarkMode(context);
     return Material(
       color: dark ? Mycolors.black :  Mycolors.white,
 

@@ -35,7 +35,7 @@ class UserRepository extends GetxController {
   }
 
   // get user details to Db
-  Future<UserModel> FetchUserDetails() async {
+  Future<UserModel> fetchUserDetails() async {
     try {
       final documentSnapshot = await _Db.collection(
         MyKeys.userCollention,
@@ -46,6 +46,40 @@ class UserRepository extends GetxController {
         return user;
       }
       return UserModel.empty();
+    } on FirebaseAuthException catch (e) {
+      throw MyFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw MyFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw MyFormatException();
+    } on PlatformException catch (e) {
+      throw MyPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong.Please try again";
+    }
+  }
+
+  // update user details in single filed to Db
+  Future<void> updateUserDetails(Map<String,dynamic>map) async {
+    try {
+      _Db.collection(MyKeys.userCollention).doc(authentication_repo.instance.currentUser!.uid).update(map);
+    } on FirebaseAuthException catch (e) {
+      throw MyFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw MyFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw MyFormatException();
+    } on PlatformException catch (e) {
+      throw MyPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong.Please try again";
+    }
+  }
+
+  // delete user details from Db
+  Future<void> removeUserRecord(String userId) async {
+    try {
+      await _Db.collection(MyKeys.userCollention).doc(userId).delete();
     } on FirebaseAuthException catch (e) {
       throw MyFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {

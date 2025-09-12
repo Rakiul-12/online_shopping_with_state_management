@@ -21,7 +21,7 @@ class MyVerticaLImageText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dark = MyHeplerFunction.isDarkMode(context);
+    bool dark = MyHelperFunction.isDarkMode(context);
     return GestureDetector(
       onTap: onPressed,
       child: Column(

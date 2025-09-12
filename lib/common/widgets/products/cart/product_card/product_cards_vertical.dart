@@ -21,7 +21,7 @@ class MyProductCardVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = MyHeplerFunction.isDarkMode(context);
+    final dark = MyHelperFunction.isDarkMode(context);
     return GestureDetector(
       onTap: () {
         Get.to(()=>prodcut_details());

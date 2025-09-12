@@ -26,7 +26,7 @@ class MyAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dark = MyHeplerFunction.isDarkMode(context);
+    bool dark = MyHelperFunction.isDarkMode(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Mysize.md),
       child: AppBar(

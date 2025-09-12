@@ -4,6 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:online_shop/data/repository/user/UserRepository.dart';
 import 'package:online_shop/features/authentication/screens/login/login_screen.dart';
 import 'package:online_shop/features/authentication/screens/onbolading/onbolading.dart';
 import 'package:online_shop/features/authentication/screens/signUp/verifyScreen/verifyScreen.dart';
@@ -176,4 +177,41 @@ class authentication_repo extends GetxController {
     }
   }
 
+
+  // Delete user account
+  Future<void> deleteAccount() async {
+    try{
+     await UserRepository.instance.removeUserRecord(currentUser!.uid);
+     await _auth.currentUser?.delete();
+    }on FirebaseAuthException catch(e){
+      throw MyFirebaseAuthException(e.code).message;
+    }on FirebaseException catch(e){
+      throw MyFirebaseException(e.code).message;
+    }on FormatException catch(_){
+      throw MyFormatException();
+    }on PlatformException catch(e){
+      throw MyPlatformException(e.code).message;
+    }catch(e){
+      throw "Something went wrong.Please try again";
+    }
+  }
+
+
+  // Re-Authenticate User With Email and Password
+  Future<void> reauthenticateUserWithEmailAndPassword(String email , String password) async {
+    try{
+      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
+      await currentUser!.reauthenticateWithCredential(credential);
+    }on FirebaseAuthException catch(e){
+      throw MyFirebaseAuthException(e.code).message;
+    }on FirebaseException catch(e){
+      throw MyFirebaseException(e.code).message;
+    }on FormatException catch(_){
+      throw MyFormatException();
+    }on PlatformException catch(e){
+      throw MyPlatformException(e.code).message;
+    }catch(e){
+      throw "Something went wrong.Please try again";
+    }
+  }
 }

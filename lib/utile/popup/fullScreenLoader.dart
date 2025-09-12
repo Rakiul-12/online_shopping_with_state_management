@@ -12,7 +12,7 @@ class MyFullScreenLoader {
         builder: (_)=>PopScope(
           canPop: false,
             child:Container(
-              color: MyHeplerFunction.isDarkMode(Get.context!) ? Mycolors.dark : Mycolors.white,
+              color: MyHelperFunction.isDarkMode(Get.context!) ? Mycolors.dark : Mycolors.white,
               width: double.infinity,
               height: double.infinity,
               child: Column(

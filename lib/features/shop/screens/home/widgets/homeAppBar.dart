@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:online_shop/common/widgets/shimmer/shimmerEffets.dart';
 import 'package:online_shop/features/personalization/controller/userController.dart';
+import 'package:online_shop/utile/helpers/helper_functions.dart';
 import '../../../../../common/widgets/AppBar/CustomAppbar.dart';
 import '../../../../../common/widgets/products/cart/cartCounterIcon.dart';
 import '../../../../../utile/const/colors.dart';
@@ -21,7 +22,7 @@ class MyHomeAppBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            MyText.HomeScreenAppBartitle,
+            MyHelperFunction.getGreetingMessage(),
             style: Theme.of(
               context,
             ).textTheme.titleMedium!.apply(color: Mycolors.grey),

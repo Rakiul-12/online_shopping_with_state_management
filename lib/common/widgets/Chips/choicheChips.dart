@@ -15,7 +15,7 @@ class MyChoiceChip extends StatelessWidget {
   final Function(bool?) onSelected;
   @override
   Widget build(BuildContext context) {
-    bool isColor = MyHeplerFunction.getColor(text) != null;
+    bool isColor = MyHelperFunction.getColor(text) != null;
     return ChoiceChip(
       label: isColor ? SizedBox() : Text(text),
       selected: selected,
@@ -24,8 +24,8 @@ class MyChoiceChip extends StatelessWidget {
       shape:  isColor ? CircleBorder() : null,
       padding: isColor ? EdgeInsets.zero : null,
       labelPadding: isColor ? EdgeInsets.zero : null,
-      avatar:  isColor ? MyCirculerContainer(width: 50,height: 50,backgroundColor: MyHeplerFunction.getColor(text)!,) : null,
-      backgroundColor: isColor ? MyHeplerFunction.getColor(text) : null,
+      avatar:  isColor ? MyCirculerContainer(width: 50,height: 50,backgroundColor: MyHelperFunction.getColor(text)!,) : null,
+      backgroundColor: isColor ? MyHelperFunction.getColor(text) : null,
     );
   }
 }

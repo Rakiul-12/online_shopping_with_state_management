@@ -13,7 +13,7 @@ class MySearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dark = MyHeplerFunction.isDarkMode(context);
+    bool dark = MyHelperFunction.isDarkMode(context);
     return Positioned(
         bottom: 0,
         right: Mysize.spaceBtwSections,

@@ -13,7 +13,7 @@ class navigationMenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dark = MyHeplerFunction.isDarkMode(context);
+    bool dark = MyHelperFunction.isDarkMode(context);
     final controller = Get.put(navigationController());
     return Scaffold(
 
