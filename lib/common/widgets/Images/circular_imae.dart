@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:online_shop/features/personalization/controller/userController.dart';
 import 'package:online_shop/utile/const/colors.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/helpers/helper_functions.dart';
+import '../shimmer/shimmerEffets.dart';
 
 
 class MyCirculerImage extends StatelessWidget {
@@ -31,6 +34,7 @@ class MyCirculerImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    userController.instance;
     final dark = MyHelperFunction.isDarkMode(context);
 
     return Container(
@@ -43,21 +47,17 @@ class MyCirculerImage extends StatelessWidget {
           border: showBorder ? Border.all(color: borderColor, width: borderWidth) : null),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
-        child: Image(fit: fit,image: isNetworkImage ? NetworkImage(image) : AssetImage(image)as ImageProvider,),
-      )
+        child: isNetworkImage
+            ? CachedNetworkImage(
+            fit: fit,
+            color: overlayColor,
+            progressIndicatorBuilder: (context, url, progress) => MyShimmerEffect(width: 55, height: 55),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+            imageUrl: image)
+            : Image(fit: fit, image: AssetImage(image)),
+      ),
     );
   }
 }
 
-//
-// ClipRRect(
-// borderRadius: BorderRadius.circular(100),
-// child: isNetworkImage
-// ? CachedNetworkImage(
-// fit: fit,
-// color: overlayColor,
-// progressIndicatorBuilder: (context, url, progress) => UShimmerEffect(width: 55, height: 55),
-// errorWidget: (context, url, error) => Icon(Icons.error),
-// imageUrl: image)
-//     : Image(fit: fit, image: AssetImage(image)),
-// ),
+

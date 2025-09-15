@@ -7,7 +7,6 @@ import 'package:online_shop/utile/helpers/helper_functions.dart';
 import '../../../../../common/widgets/AppBar/CustomAppbar.dart';
 import '../../../../../common/widgets/products/cart/cartCounterIcon.dart';
 import '../../../../../utile/const/colors.dart';
-import '../../../../../utile/const/text.dart';
 
 class MyHomeAppBar extends StatelessWidget {
   const MyHomeAppBar({super.key, required this.dark});

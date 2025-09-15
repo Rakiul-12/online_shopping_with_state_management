@@ -58,8 +58,21 @@ dependencies:
   #connectivity_plus:
   connectivity_plus: ^6.1.5
 
-  #shimmer:flj
+  #shimmer:
   shimmer: ^3.0.0
+
+  #dio:-for cloudinary
+  dio: ^5.9.0
+
+  #image_picker:
+  image_picker: ^1.2.0
+
+  #crypto:
+  crypto: ^3.0.6
+
+  #path_provider:
+  path_provider: ^2.1.5
+
 
 
 

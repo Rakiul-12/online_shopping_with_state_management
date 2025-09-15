@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 class MyHelperFunction{
   MyHelperFunction._();
@@ -60,5 +64,19 @@ class MyHelperFunction{
     } else {
       return 'Good Night';
     }
+  }
+
+  // function to convert asset file to file
+  static Future<File> assetToFile (String assetPath ) async {
+    // load asset bytes
+    final byteData = await rootBundle.load(assetPath);
+    
+    // Get temp directory
+    final tempDir = await getTemporaryDirectory();
+    final file = File("${tempDir.path}/${assetPath.split("/").last}");
+
+    // write bytes to temp file
+    await file.writeAsBytes(byteData.buffer.asUint8List());
+    return file;
   }
 }

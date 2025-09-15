@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_shop/common/widgets/Images/circular_imae.dart';
 import '../../../utile/const/colors.dart';
 import '../../../utile/const/sizes.dart';
 import '../../../utile/helpers/helper_functions.dart';
@@ -26,12 +27,11 @@ class MyVerticaLImageText extends StatelessWidget {
       onTap: onPressed,
       child: Column(
         children: [
-          MyCirculerContainer(
-            height: 56,
-            width: 56,
-            backgroundColor: backgroundColor ?? (dark ? Mycolors.dark : Mycolors.light),
-            padding: EdgeInsets.all(Mysize.sm),
-            child: Image(image: AssetImage(image),fit: BoxFit.cover,color: dark ? Mycolors.light : Mycolors.dark,),
+          MyCirculerImage(
+              height: 56,
+              width: 56,
+              image: image,
+            isNetworkImage: true,
           ),
           SizedBox(height: Mysize.spaceBtwItems / 2,),
           SizedBox(

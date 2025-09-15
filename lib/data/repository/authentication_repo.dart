@@ -5,14 +5,18 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:online_shop/data/repository/user/UserRepository.dart';
+import 'package:online_shop/dummyData.dart';
 import 'package:online_shop/features/authentication/screens/login/login_screen.dart';
-import 'package:online_shop/features/authentication/screens/onbolading/onbolading.dart';
+import 'package:online_shop/features/authentication/screens/onbolading/onBoading.dart';
 import 'package:online_shop/features/authentication/screens/signUp/verifyScreen/verifyScreen.dart';
+import 'package:online_shop/features/personalization/controller/userController.dart';
 import 'package:online_shop/navigation_menu.dart';
 import 'package:online_shop/utile/exceptions/firebase_auth_exceptions.dart';
 import 'package:online_shop/utile/exceptions/firebase_exceptions.dart';
 import 'package:online_shop/utile/exceptions/formate_exceptions.dart';
 import 'package:online_shop/utile/exceptions/platform_exceptions.dart';
+
+import 'catagory/catagoryRepository.dart';
 
 
 class authentication_repo extends GetxController {
@@ -27,6 +31,7 @@ class authentication_repo extends GetxController {
   void onReady() {
     FlutterNativeSplash.remove();
     screenRedirect();
+
   }
 
   // function to redirect to the right screen
@@ -182,7 +187,15 @@ class authentication_repo extends GetxController {
   Future<void> deleteAccount() async {
     try{
      await UserRepository.instance.removeUserRecord(currentUser!.uid);
+
+
+     // Remove profile Picture from cloudinary
+     String publicId = userController.instance.user.value.publicId;
+     if(publicId.isNotEmpty){
+       UserRepository.instance.deleteProfilePicture(publicId);
+     }
      await _auth.currentUser?.delete();
+
     }on FirebaseAuthException catch(e){
       throw MyFirebaseAuthException(e.code).message;
     }on FirebaseException catch(e){

@@ -7,7 +7,6 @@ import 'package:online_shop/common/widgets/Button/elevatedButton.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
 import 'package:online_shop/features/personalization/controller/changeNameController.dart';
 import 'package:online_shop/utile/const/sizes.dart';
-import 'package:online_shop/utile/const/text.dart';
 import '../../../../utile/validators/validations.dart';
 
 class changeUserNameScreen extends StatelessWidget {

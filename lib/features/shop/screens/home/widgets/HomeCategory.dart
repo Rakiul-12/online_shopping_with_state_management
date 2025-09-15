@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:online_shop/features/shop/models/catagoryModel.dart';
 import 'package:online_shop/features/shop/screens/SubCatagory/SubCatagory.dart';
-import 'package:online_shop/utile/const/image.dart';
 import '../../../../../common/widgets/Image_text/imge_text.dart';
 import '../../../../../utile/const/colors.dart';
 import '../../../../../utile/const/sizes.dart';
 import '../../../../../utile/const/text.dart';
+import '../../../controller/category/categoryController.dart';
 
 class MyHomeCategory extends StatelessWidget {
   const MyHomeCategory({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(categoryController());
     return Padding(
       padding: const EdgeInsets.only(left: Mysize.spaceBtwSections),
       child: Column(
@@ -24,23 +26,38 @@ class MyHomeCategory extends StatelessWidget {
             ).textTheme.headlineSmall!.apply(color: Mycolors.white),
           ),
           SizedBox(height: Mysize.spaceBtwSections),
-          SizedBox(
-            height: 80,
-            child: ListView.separated(
-              separatorBuilder: (context, index) =>
-                  SizedBox(width: Mysize.spaceBtwItems),
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return MyVerticaLImageText(
-                  title: "Sport Categories",
-                  image: MyImage.bagsIcon,
-                  textColor: Mycolors.white,
-                  onPressed: ()=>Get.to(()=>subCatagory()),
-                );
-              },
-            ),
-          ),
+
+          Obx(() {
+            final categories = controller.featureCategories;
+
+            if (controller.isCategoryLoading.value) {
+              return CircularProgressIndicator();
+            }
+
+            if (categories.isEmpty) {
+              return Text("Category not found");
+            }
+
+            // data found
+            return SizedBox(
+              height: 82,
+              child: ListView.separated(
+                separatorBuilder: (context, index) =>
+                    SizedBox(width: Mysize.spaceBtwItems),
+                scrollDirection: Axis.horizontal,
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  CategoryModel category = categories[index];
+                  return MyVerticaLImageText(
+                    title: category.name,
+                    image: category.image,
+                    textColor: Mycolors.white,
+                    onPressed: () => Get.to(() => subCatagory()),
+                  );
+                },
+              ),
+            );
+          }),
         ],
       ),
     );

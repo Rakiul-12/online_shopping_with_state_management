@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:online_shop/features/authentication/screens/onbolading/onbolading.dart';
+import 'package:online_shop/features/authentication/screens/onbolading/onBoading.dart';
 import 'package:online_shop/utile/theme/themes.dart';
 
 import 'bindings/bindings.dart';

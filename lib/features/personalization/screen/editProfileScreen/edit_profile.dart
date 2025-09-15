@@ -4,12 +4,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/common/widgets/AppBar/CustomAppbar.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
-import 'package:online_shop/data/repository/authentication_repo.dart';
 import 'package:online_shop/features/authentication/screens/EditUserNameScreen/change_name.dart';
 import 'package:online_shop/features/personalization/controller/userController.dart';
 import 'package:online_shop/features/personalization/screen/editProfileScreen/widgets/UserProfileWithUserIcon.dart';
 import 'package:online_shop/utile/const/sizes.dart';
-import 'package:online_shop/utile/popup/fullScreenLoader.dart';
 
 class edit_profile extends StatelessWidget {
   const edit_profile({super.key});

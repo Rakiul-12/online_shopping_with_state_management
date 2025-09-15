@@ -5,19 +5,19 @@ import 'package:online_shop/common/widgets/AppBar/CustomAppbar.dart';
 import 'package:online_shop/common/widgets/Button/elevatedButton.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
 import 'package:online_shop/features/personalization/controller/userController.dart';
+import 'package:online_shop/navigation_menu.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/const/text.dart';
 import 'package:online_shop/utile/validators/validations.dart';
 
-class reAuthenticationSceeen extends StatelessWidget {
-  const reAuthenticationSceeen({super.key});
+class reAuthenticationScreen extends StatelessWidget {
+  const reAuthenticationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = userController.instance;
     return Scaffold(
       appBar: MyAppbar(
-        showBackArrow: true,
         title: Text('Re-authenticate user'),
       ),
       body: SingleChildScrollView(
@@ -61,6 +61,10 @@ class reAuthenticationSceeen extends StatelessWidget {
                 ),
                 SizedBox(height: Mysize.spaceBtwSections),
                 MyElevatedButton(onPressed: controller.reAuthenticateUser, child: Text("Verify")),
+                SizedBox(height: Mysize.spaceBtwItems),
+                MyElevatedButton(onPressed:(){
+                  Get.offAll(()=>navigationMenuScreen());
+                }, child: Text("Cancel")),
               ],
             ),
           ),

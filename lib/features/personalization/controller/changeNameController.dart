@@ -47,7 +47,7 @@ class ChangeNameController extends GetxController{
       }
 
       Map<String ,dynamic>map ={"firstName": firstName.text,"lastName": lastName.text};
-      await _userRepository.updateUserDetails(map);
+      await _userRepository.updateSingleField(map);
 
 
       // Update user form Rx

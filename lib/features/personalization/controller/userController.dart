@@ -1,7 +1,10 @@
+import 'dart:io';
+import 'package:dio/dio.dart'as dio;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:online_shop/data/repository/user/UserRepository.dart';
 import 'package:online_shop/features/authentication/models/user_modal.dart';
 import 'package:online_shop/features/authentication/screens/login/login_screen.dart';
@@ -19,6 +22,8 @@ class userController extends GetxController {
   Rx<UserModel> user = UserModel.empty().obs;
   RxBool profileLoading = false.obs;
 
+  RxBool isLoading = false.obs;
+
 
   // Re-authentication screen form variable
   final email = TextEditingController();
@@ -35,19 +40,23 @@ class userController extends GetxController {
   // save user record
   Future<void> saveUserRecord(UserCredential userCredential) async {
     try {
-      final nameParts = UserModel.nameParts(userCredential.user!.displayName);
-      final username = "${userCredential.user!.displayName}123";
+      await fetchUserRecord();
+      if(user.value.id.isEmpty){
+        final nameParts = UserModel.nameParts(userCredential.user!.displayName);
+        final username = "${userCredential.user!.displayName}123";
 
-      UserModel userModel = UserModel(
-        id: userCredential.user!.uid,
-        firstName: nameParts[0],
-        lastName: nameParts.length > 1 ? nameParts.sublist(1).join(" ") : "",
-        username: username,
-        email: userCredential.user!.email ?? "",
-        phoneNumber: userCredential.user!.phoneNumber ?? "",
-        profilePicture: userCredential.user!.photoURL ?? "",
-      );
-      await _userRepository.saveUserRecord(userModel);
+        UserModel userModel = UserModel(
+          id: userCredential.user!.uid,
+          firstName: nameParts[0],
+          lastName: nameParts.length > 1 ? nameParts.sublist(1).join(" ") : "",
+          username: username,
+          email: userCredential.user!.email ?? "",
+          phoneNumber: userCredential.user!.phoneNumber ?? "",
+          profilePicture: userCredential.user!.photoURL ?? "",
+        );
+        await _userRepository.saveUserRecord(userModel);
+      }
+
     } catch (e) {
       MySnackBarHelpers.warningSnackBar(
         title: "Data not saved",
@@ -107,7 +116,7 @@ class userController extends GetxController {
       }
       // if user login with email and pass
       else  if(provider == "password"){
-        Get.to(()=>reAuthenticationSceeen());
+        Get.to(()=>reAuthenticationScreen());
       }
     }catch(e){
       MyFullScreenLoader.stopLoading();
@@ -139,6 +148,50 @@ class userController extends GetxController {
     }catch(e){
       MyFullScreenLoader.stopLoading();
       MySnackBarHelpers.errorSnackBar(title: "Error",message: e.toString());
+    }
+  }
+
+
+  // Update user profile picture
+  Future<void>updateUserProfilePicture()async{
+    try{
+
+      isLoading.value= true;
+      // pick image form gallery
+      XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery,maxHeight: 512,maxWidth: 512);
+      if(image == null)return;
+
+      // convert XFile to file
+      File file = File(image.path);
+
+      // delete user current profile picture
+      if(user.value.publicId.isNotEmpty){
+        await _userRepository.deleteProfilePicture(user.value.publicId);
+      }
+
+      // upload picture to cloudinary
+      dio.Response response = await _userRepository.updateProfilePicture(file);
+      if (response.statusCode == 200){
+        final data = response.data;
+        final imageUrl = data["url"];
+        final publicId = data["public_id"];
+
+        // update profile picture from firestore
+        _userRepository.updateSingleField({"profilePicture" : imageUrl,"publicId" : publicId});
+
+        // update profile and public id form RxUser
+        user.value.profilePicture = imageUrl;
+        user.value.publicId = publicId;
+        user.refresh();
+        MySnackBarHelpers.successSnackBar(title: "Congratulation",message: 'Profile picture update successfully');
+      }else{
+        throw "Failed to upload profile picture.Please try again";
+      }
+    }catch(e){
+      MyFullScreenLoader.stopLoading();
+      MySnackBarHelpers.errorSnackBar(title: "Failed!",message: e.toString());
+    }finally{
+      isLoading.value= false;
     }
   }
 }
