@@ -58,13 +58,6 @@ class home_screen extends StatelessWidget {
               child: Column(
                 children: [
                   MyPromoSlider(
-                    banners: [
-                      MyImage.banner_1,
-                      MyImage.banner_2,
-                      MyImage.banner_3,
-                      MyImage.banner_4,
-                      MyImage.banner_5,
-                    ],
                   ),
                    SizedBox(height: Mysize.md,),
                    MySectionHeading(

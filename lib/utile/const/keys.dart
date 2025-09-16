@@ -1,12 +1,13 @@
 class MyKeys{
   MyKeys._();
 
-  static String userCollention = "Users";
+  static String userCollection = "Users";
   static String rememberMeEmail = "rememberemail";
   static String rememberMePass = "rememberpass";
 
 
   static String categoriesCollection ="Categories";
+  static String bannersCollection ="Banners";
 
   static String cloudName ="diumcbq4a";
   static String uploadPreset ="upload_image";
@@ -15,4 +16,5 @@ class MyKeys{
   static String apiSecret ="0gLGCHCsDmUQWNMFhGuqeX4e05U";
 
   static String categoryFolder ="Category folder";
+  static String bannerFolder ="Banner folder";
 }

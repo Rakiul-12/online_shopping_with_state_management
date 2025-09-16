@@ -1,38 +1,37 @@
 import 'dart:io';
+import 'package:dio/dio.dart'as dio;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:online_shop/features/shop/models/banners_model.dart';
 import 'package:online_shop/utile/const/keys.dart';
 import 'package:online_shop/utile/helpers/helper_functions.dart';
-import '../../../features/shop/models/catagoryModel.dart';
 import '../../../utile/exceptions/firebase_exceptions.dart';
 import '../../../utile/exceptions/formate_exceptions.dart';
 import '../../../utile/exceptions/platform_exceptions.dart';
 import '../../service/cloudinaryService.dart';
-import 'package:dio/dio.dart'as dio;
 
-class categoryRepository extends GetxController{
-  static categoryRepository get instance => Get.find();
+class bannerRepository extends GetxController{
+
+  static bannerRepository get instance=>Get.find();
 
   final _db = FirebaseFirestore.instance;
   final _cloudinaryServices = Get.put(cloudinaryServices());
 
-  // Function to upload list of category
-  Future<void> uploadCategories (List<CategoryModel> categories) async {
-    try {
-      for (final category in categories ){
-        File image = await MyHelperFunction.assetToFile(category.image);
-         dio.Response response = await _cloudinaryServices.uploadImage(image, MyKeys.categoryFolder);
-         if(response.statusCode == 200){
-           category.image = response.data["url"];
-         }
 
-        await _db.collection(MyKeys.categoriesCollection).doc(category.id).set(category.toJson());
+  // upload banner on firebase and cloudinary
+  Future<void> uploadBanners (List<BannerModel> banners)async{
+    try{
 
-         print("Category Upload : ${category.name}");
+      for(final banner in banners){
+        File image = await MyHelperFunction.assetToFile(banner.imageUrl);
+        dio.Response response= await _cloudinaryServices.uploadImage(image, MyKeys.bannerFolder);
+        if(response.statusCode == 200){
+          banner.imageUrl = response.data['url'];
+        }
+        await _db.collection(MyKeys.bannersCollection).doc().set(banner.toJson());
+        print("Banner uploaded : ${banner.targetScreen}");
       }
-
     } on FirebaseException catch (e) {
       throw MyFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -42,20 +41,20 @@ class categoryRepository extends GetxController{
     } catch (e) {
       throw "Something went wrong.Please try again";
     }
-    
   }
 
 
-  // Function to fetch list of categories
-  Future<List<CategoryModel>> getAllCategories()async {
-    try {
-      final query = await _db.collection(MyKeys.categoriesCollection).get();
+
+  // fetch active banner from firebase and cloudinary
+  Future<List<BannerModel>> fetchBanners ()async{
+    try{
+      final query =await _db.collection(MyKeys.bannersCollection).where("active",isEqualTo: true).get();
+
       if(query.docs.isNotEmpty){
-        List<CategoryModel> categories = query.docs.map((document) =>
-            CategoryModel.fromSnapshot(document)).toList();
-        return categories;
+        List<BannerModel>banners = query.docs.map((document) => BannerModel.fromDocument(document)).toList();
+        return banners;
       }
-      return [];
+        return [];
     } on FirebaseException catch (e) {
       throw MyFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -65,6 +64,5 @@ class categoryRepository extends GetxController{
     } catch (e) {
       throw "Something went wrong.Please try again";
     }
-
   }
 }

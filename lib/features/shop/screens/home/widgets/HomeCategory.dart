@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:online_shop/common/widgets/shimmer/categorySimmer.dart';
 import 'package:online_shop/features/shop/models/catagoryModel.dart';
 import 'package:online_shop/features/shop/screens/SubCatagory/SubCatagory.dart';
 import '../../../../../common/widgets/Image_text/imge_text.dart';
@@ -28,16 +29,14 @@ class MyHomeCategory extends StatelessWidget {
           SizedBox(height: Mysize.spaceBtwSections),
 
           Obx(() {
+
             final categories = controller.featureCategories;
-
             if (controller.isCategoryLoading.value) {
-              return CircularProgressIndicator();
+              return MyCategoryShimmer(itemCount: 6,);
             }
-
-            if (categories.isEmpty) {
-              return Text("Category not found");
+            if(categories.isEmpty){
+              return Text("Category was empty");
             }
-
             // data found
             return SizedBox(
               height: 82,

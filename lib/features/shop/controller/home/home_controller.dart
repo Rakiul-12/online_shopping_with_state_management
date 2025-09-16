@@ -5,11 +5,5 @@ class HomeController extends GetxController{
 
   static HomeController get instance =>Get.find();
 
-  final carousalController = CarouselSliderController();
 
-  RxInt currentIndex = 0.obs;
-
-  void onPagedChanged (int index){
-    currentIndex.value = index ;
-  }
 }

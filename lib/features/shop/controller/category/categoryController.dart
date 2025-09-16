@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:online_shop/features/shop/models/catagoryModel.dart';
 import 'package:online_shop/utile/popup/snackbarHelpers.dart';
-import '../../../../data/repository/catagory/catagoryRepository.dart';
+import '../../../../data/repository/catagory/categoryRepository.dart';
 
 class categoryController extends GetxController{
-  static categoryController get find => Get.find();
+  static categoryController get instance => Get.find();
 
   final _repository = Get.put(categoryRepository());
 
@@ -16,8 +16,8 @@ class categoryController extends GetxController{
 
   @override
   void onInit() {
-    featureCategories();
     super.onInit();
+    fetchCategories();
   }
 
 
@@ -31,6 +31,7 @@ class categoryController extends GetxController{
       // fetch categories
       List<CategoryModel> categories = await _repository.getAllCategories();
       allCategories.assignAll(categories);
+
 
       // get feature categories
       featureCategories.assignAll(categories.where((category)=>category.isFeatured && category.parentId.isEmpty));

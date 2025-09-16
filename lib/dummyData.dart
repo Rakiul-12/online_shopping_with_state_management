@@ -1,16 +1,18 @@
+import 'package:online_shop/features/shop/models/banners_model.dart';
+import 'package:online_shop/routes/routes.dart';
 import 'package:online_shop/utile/const/image.dart';
 import 'features/shop/models/catagoryModel.dart';
 
 class MyDummyData {
   /// List of all Banners
 
-  // static final List<BannerModel> banner = [
-  //   BannerModel(imageUrl: UImages.homeBanner1, targetScreen: URoutes.order, active: true),
-  //   BannerModel(imageUrl: UImages.homeBanner2, targetScreen: URoutes.cart, active: true),
-  //   BannerModel(imageUrl: UImages.homeBanner3, targetScreen: URoutes.wishlist, active: true),
-  //   BannerModel(imageUrl: UImages.homeBanner4, targetScreen: URoutes.productDetail, active: true),
-  //   BannerModel(imageUrl: UImages.homeBanner5, targetScreen: URoutes.profile, active: true),
-  // ];
+  static final List<BannerModel> banner = [
+    BannerModel(imageUrl: MyImage.banner_1, targetScreen: MyRoutes.order, active: true),
+    BannerModel(imageUrl: MyImage.banner_2, targetScreen: MyRoutes.cart, active: true),
+    BannerModel(imageUrl: MyImage.banner_3, targetScreen: MyRoutes.wishlist, active: true),
+    BannerModel(imageUrl: MyImage.banner_4, targetScreen: MyRoutes.productDetail, active: true),
+    BannerModel(imageUrl: MyImage.banner_5, targetScreen: MyRoutes.profile, active: true),
+  ];
 
   /// List of all Categories
   static final List<CategoryModel> categories = [

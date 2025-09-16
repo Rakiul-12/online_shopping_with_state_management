@@ -1,32 +1,51 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:online_shop/common/widgets/shimmer/shimmerEffets.dart';
+import 'package:online_shop/features/shop/controller/banner/bannerController.dart';
 import 'package:online_shop/features/shop/controller/home/home_controller.dart';
 import '../../../../../common/widgets/Images/roundedImage.dart';
 import '../../../../../utile/const/sizes.dart';
 import 'bannerDotNavigation.dart';
 
 class MyPromoSlider extends StatelessWidget {
-  const MyPromoSlider({
-    super.key, required this.banners,
-  });
+  const MyPromoSlider({super.key});
 
-  final List<String> banners;
   @override
   Widget build(BuildContext context) {
+    final bannerController = Get.put(BannerController());
 
-    final controller = HomeController.instance;
-
-    return Column(
-      children: [
-        CarouselSlider(
-          items: banners.map((banner)=>MyRoundedImge(imageUrl: banner)).toList(),
-          options: CarouselOptions(viewportFraction: 1.0,onPageChanged: (index, reason) => controller.onPagedChanged(index),),
-          carouselController: controller.carousalController,
-
-        ),
-        SizedBox(height: Mysize.spaceBtwItems,),
-        BannerDotIndicator()
-      ],
-    );
+    return Obx(() {
+      if (bannerController.isLoadingBanner.value) {
+        return MyShimmerEffect(width: double.infinity, height: 190);
+      }
+      if (bannerController.banners.isEmpty) {
+        return Text("No banners found");
+      }
+      return Column(
+        children: [
+          CarouselSlider(
+            items: bannerController.banners
+                .map(
+                  (banner) => MyRoundedImge(
+                    imageUrl: banner.imageUrl,
+                    isNetworkImage: true,
+                    onPressed: ()=>Get.toNamed(banner.targetScreen),
+                  ),
+                )
+                .toList(),
+            options: CarouselOptions(
+              viewportFraction: 1.0,
+              onPageChanged: (index, reason) =>
+                  bannerController.onPagedChanged(index),
+            ),
+            carouselController: bannerController.carousalController,
+          ),
+          SizedBox(height: Mysize.spaceBtwItems),
+          BannerDotIndicator(),
+        ],
+      );
+    });
   }
 }

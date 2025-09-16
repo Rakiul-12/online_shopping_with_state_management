@@ -26,7 +26,7 @@ class UserRepository extends GetxController {
   Future<void> saveUserRecord(UserModel user) async {
     try {
       await _Db.collection(
-        MyKeys.userCollention,
+        MyKeys.userCollection,
       ).doc(user.id).set(user.toJson());
     } on FirebaseAuthException catch (e) {
       throw MyFirebaseAuthException(e.code).message;
@@ -45,7 +45,7 @@ class UserRepository extends GetxController {
   Future<UserModel> fetchUserDetails() async {
     try {
       final documentSnapshot = await _Db.collection(
-        MyKeys.userCollention,
+        MyKeys.userCollection,
       ).doc(authentication_repo.instance.currentUser!.uid).get();
 
       if (documentSnapshot.exists) {
@@ -69,7 +69,7 @@ class UserRepository extends GetxController {
   // update user details in single filed to Db
   Future<void> updateSingleField(Map<String,dynamic>map) async {
     try {
-      _Db.collection(MyKeys.userCollention).doc(authentication_repo.instance.currentUser!.uid).update(map);
+      _Db.collection(MyKeys.userCollection).doc(authentication_repo.instance.currentUser!.uid).update(map);
     } on FirebaseAuthException catch (e) {
       throw MyFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -86,7 +86,7 @@ class UserRepository extends GetxController {
   // delete user details from Db
   Future<void> removeUserRecord(String userId) async {
     try {
-      await _Db.collection(MyKeys.userCollention).doc(userId).delete();
+      await _Db.collection(MyKeys.userCollection).doc(userId).delete();
     } on FirebaseAuthException catch (e) {
       throw MyFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
+import 'package:online_shop/features/shop/controller/category/categoryController.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/catagoryTabs.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/store_primary_header.dart';
 import 'package:online_shop/utile/const/sizes.dart';
@@ -14,9 +15,10 @@ class shop_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = categoryController.instance;
     // final dark = MyHeplerFunction.isDarkMode(context);
     return DefaultTabController(
-      length: 5,
+      length: controller.featureCategories.length,
       child: Scaffold(
         body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -62,25 +64,13 @@ class shop_screen extends StatelessWidget {
                   ),
                 ),
                 bottom: MyCustonTabBar(
-                  tabs: [
-                    Tab(child: Text("Sports")),
-                    Tab(child: Text("Furniture")),
-                    Tab(child: Text("Electronics")),
-                    Tab(child: Text("Cloths")),
-                    Tab(child: Text("Cosmetics")),
-                  ],
+                  tabs: controller.featureCategories.map((category) => Tab(child: Text(category.name)),).toList(),
                 ),
               ),
             ];
           },
           body: TabBarView(
-            children: [
-              MyCatagoryTab(),
-              MyCatagoryTab(),
-              MyCatagoryTab(),
-              MyCatagoryTab(),
-              MyCatagoryTab(),
-            ],
+            children: controller.featureCategories.map((element) => MyCatagoryTab(),).toList()
           ),
         ),
       ),
