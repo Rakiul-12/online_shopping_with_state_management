@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_shop/features/shop/models/brandModel.dart';
 import 'package:online_shop/utile/helpers/helper_functions.dart';
 import '../../utile/const/colors.dart';
 import '../../utile/const/sizes.dart';
@@ -22,7 +23,7 @@ class MyBrandShowcase extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MyBrandCard(showBorder: false),
+          MyBrandCard(showBorder: false,brand: BrandModel.empty(),),
           Row(
             children: image
                 .map((image) => buildBrandImage(dark, image))

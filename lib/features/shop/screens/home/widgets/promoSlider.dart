@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:online_shop/common/widgets/shimmer/shimmerEffets.dart';
 import 'package:online_shop/features/shop/controller/banner/bannerController.dart';
-import 'package:online_shop/features/shop/controller/home/home_controller.dart';
 import '../../../../../common/widgets/Images/roundedImage.dart';
 import '../../../../../utile/const/sizes.dart';
 import 'bannerDotNavigation.dart';

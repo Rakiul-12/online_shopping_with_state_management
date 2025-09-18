@@ -4,6 +4,7 @@ import 'package:online_shop/common/widgets/AppBar/CustomAppbar.dart';
 import 'package:online_shop/common/widgets/icons/circular_icon.dart';
 import 'package:online_shop/common/widgets/layouts/grid_layout.dart';
 import 'package:online_shop/common/widgets/products/cart/product_card/product_cards_vertical.dart';
+import 'package:online_shop/features/shop/models/productModel.dart';
 
 import 'package:online_shop/navigation_menu.dart';
 import 'package:online_shop/utile/const/sizes.dart';
@@ -34,7 +35,7 @@ class wishlist_screen extends StatelessWidget {
           child: MyGridLayout(
             itemCount: 10,
               itemBuilder: (context, index) {
-                return MyProductCardVertical();
+                return MyProductCardVertical(product: ProductModel.empty());
               },
           ),
         ),

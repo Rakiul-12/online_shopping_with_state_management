@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:online_shop/features/shop/controller/home/home_controller.dart';
+import 'package:online_shop/features/shop/controller/productController/productController.dart';
+import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/features/shop/screens/home/widgets/HomeCategory.dart';
 import 'package:online_shop/features/shop/screens/home/widgets/homeAppBar.dart';
 import 'package:online_shop/common/widgets/custom_shapes/primary_home_container.dart';
@@ -22,6 +24,7 @@ class home_screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
+    final Product_Controller = Get.put(productController());
     bool dark = MyHelperFunction.isDarkMode(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -67,11 +70,24 @@ class home_screen extends StatelessWidget {
                   SizedBox(height: Mysize.spaceBtwItems,),
 
                   // Products Cards
-                  MyGridLayout(
-                    itemCount: 20,
-                    itemBuilder: (context, index) {
-                      return MyProductCardVertical();
-                    },
+                  Obx(
+                    (){
+                      if(Product_Controller.isLoading.value){
+                        return Center(child: CircularProgressIndicator());
+                      }
+
+                      if(Product_Controller.featuredProducts.isEmpty){
+                        return Center(child: Text("Product not found"));
+                      }
+
+                      return MyGridLayout(
+                        itemCount: Product_Controller.featuredProducts.length,
+                        itemBuilder: (context, index) {
+                          ProductModel product = Product_Controller.featuredProducts[index];
+                          return MyProductCardVertical(product: product,);
+                        },
+                      );
+                    }
                   )
                   
                 ],

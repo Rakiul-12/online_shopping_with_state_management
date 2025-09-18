@@ -1,6 +1,8 @@
 class MyText{
   MyText._();
 
+  static const String currency = '\$';
+
   static const String onBoardingTitle1 = 'Welcome to GET FAST Store';
   static const String onBoardingTitle2 = 'Shop Everything You Love!';
   static const String onBoardingTitle3 = 'Fast & Reliable Delivery!';

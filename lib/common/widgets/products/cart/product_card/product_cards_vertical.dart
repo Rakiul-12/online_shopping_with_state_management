@@ -6,6 +6,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/common/widgets/Images/roundedImage.dart';
 import 'package:online_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:online_shop/common/widgets/icons/circular_icon.dart';
+import 'package:online_shop/features/shop/controller/productController/productController.dart';
+import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/features/shop/screens/product_details/product_details.dart';
 import 'package:online_shop/utile/const/colors.dart';
 import 'package:online_shop/utile/const/image.dart';
@@ -17,11 +19,15 @@ import '../../../text/productText.dart';
 import '../../../text/product_price.dart';
 
 class MyProductCardVertical extends StatelessWidget {
-  const MyProductCardVertical({super.key});
+  const MyProductCardVertical({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final dark = MyHelperFunction.isDarkMode(context);
+    final controller = productController.instance;
+    String? salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
     return GestureDetector(
       onTap: () {
         Get.to(()=>prodcut_details());
@@ -43,7 +49,9 @@ class MyProductCardVertical extends StatelessWidget {
               backgroundColor: dark ? Mycolors.dark : Mycolors.light,
               child: Stack(
                 children: [
-                  Center(child: MyRoundedImge(imageUrl: MyImage.productImage15)),
+                  Center(child: MyRoundedImge(imageUrl: product.thumbnail,isNetworkImage: true,)),
+
+                  if(salePercentage != null)
                   Positioned(
                     top: 0,
                     child: MyRoundedContainer(
@@ -54,7 +62,7 @@ class MyProductCardVertical extends StatelessWidget {
                         vertical: Mysize.xs,
                       ),
                       child: Text(
-                        "20%",
+                        "$salePercentage%",
                         style: Theme.of(
                           context,
                         ).textTheme.labelLarge!.apply(color: Mycolors.black),
@@ -76,9 +84,9 @@ class MyProductCardVertical extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyProducttitleText(title: "Blue Bata Shoe", smallSize: true),
+                  MyProducttitleText(title: product.title, smallSize: true),
                   SizedBox(height: Mysize.spaceBtwItems / 2),
-                  MyBrandTittleWithVerifyIcon(title: 'Bata',),
+                  MyBrandTittleWithVerifyIcon(title: product.brand!.name),
                 ],
               ),
             ),
@@ -88,7 +96,7 @@ class MyProductCardVertical extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  MyProductPriceText(price: "76"),
+                  MyProductPriceText(price: controller.getProductPrice(product)),
                   Container(
                     width: Mysize.iconLg * 1.2,
                     height: Mysize.iconLg * 1.2,
@@ -104,7 +112,6 @@ class MyProductCardVertical extends StatelessWidget {
                 ],
               ),
             ),
-
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../features/shop/models/brandModel.dart';
 import '../../utile/const/enums.dart';
 import '../../utile/const/image.dart';
 import '../../utile/const/sizes.dart';
@@ -11,10 +12,12 @@ class MyBrandCard extends StatelessWidget {
     super.key,
     this.showBorder = true,
     this.onTap,
+    required this.brand,
   });
 
   final bool showBorder;
   final VoidCallback? onTap;
+  final BrandModel brand;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,11 @@ class MyBrandCard extends StatelessWidget {
         backgroundColor: Colors.transparent,
         child: Row(
           children: [
-            Flexible(child: MyRoundedImge(imageUrl: MyImage.bataLogo,backgroundColor: Colors.transparent,)),
+            Flexible(child: MyRoundedImge(
+              imageUrl: brand.image,
+              isNetworkImage: true,
+              backgroundColor: Colors.transparent,
+            )),
 
             SizedBox(width: Mysize.spaceBtwItems /2,),
 
@@ -36,8 +43,8 @@ class MyBrandCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  MyBrandTittleWithVerifyIcon(title: "Bata",brandTextSize: TextSize.large,),
-                  Text("172 products",style: Theme.of(context).textTheme.labelMedium,overflow: TextOverflow.ellipsis,)
+                  MyBrandTittleWithVerifyIcon(title: brand.name,brandTextSize: TextSize.large,),
+                  Text("${brand.productsCount} products",style: Theme.of(context).textTheme.labelMedium,overflow: TextOverflow.ellipsis,)
                 ],
               ),
             ),

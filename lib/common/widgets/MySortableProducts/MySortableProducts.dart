@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:online_shop/features/shop/models/productModel.dart';
 
 import '../../../utile/const/sizes.dart';
 import '../layouts/grid_layout.dart';
@@ -28,7 +29,7 @@ class MySortableProducts extends StatelessWidget {
               .toList(),
         ),
         SizedBox(height: Mysize.spaceBtwSections,),
-        MyGridLayout(itemCount: 10, itemBuilder: (context, index) => MyProductCardVertical(),)
+        MyGridLayout(itemCount: 10, itemBuilder: (context, index) => MyProductCardVertical(product: ProductModel.empty()))
       ],
     );
   }

@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:online_shop/data/repository/banner/banner_repository.dart';
+import 'package:online_shop/data/repository/brand/brandRepository/brand_repository.dart';
+import 'package:online_shop/data/repository/product/productRepository.dart';
 import 'package:online_shop/data/repository/user/UserRepository.dart';
 import 'package:online_shop/dummyData.dart';
 import 'package:online_shop/features/authentication/screens/login/login_screen.dart';
@@ -32,7 +34,7 @@ class authentication_repo extends GetxController {
   void onReady() {
     FlutterNativeSplash.remove();
     screenRedirect();
-    // Get.put(bannerRepository()).uploadBanners(MyDummyData.banner);
+    // Get.put(brandRepository()).uploadBrand(MyDummyData.brands);
   }
 
   // function to redirect to the right screen

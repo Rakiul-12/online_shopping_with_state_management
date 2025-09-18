@@ -8,6 +8,8 @@ class MyKeys{
 
   static String categoriesCollection ="Categories";
   static String bannersCollection ="Banners";
+  static String brandCollection ="Brands";
+  static String productCollection ="Products";
 
   static String cloudName ="diumcbq4a";
   static String uploadPreset ="upload_image";
@@ -17,4 +19,6 @@ class MyKeys{
 
   static String categoryFolder ="Category folder";
   static String bannerFolder ="Banner folder";
+  static String brandFolder ="Brand folder";
+  static String productFolder ="Product folder";
 }

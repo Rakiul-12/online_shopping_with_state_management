@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:online_shop/common/brands/brandCards.dart';
 import 'package:online_shop/common/widgets/AppBar/CustomAppbar.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
+import 'package:online_shop/features/shop/models/brandModel.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 
 import '../../../../common/widgets/MySortableProducts/MySortableProducts.dart';
@@ -18,7 +19,7 @@ class brandProdcuts extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(padding: MyPadding.screenPadding,child: Column(children: [
-          MyBrandCard(),
+          MyBrandCard(brand: BrandModel.empty(),),
           SizedBox(height: Mysize.spaceBtwItems),
           MySortableProducts()
         ],),),

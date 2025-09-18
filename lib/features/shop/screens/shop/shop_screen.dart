@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:online_shop/common/widgets/shimmer/brandShimmerEffect.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
+import 'package:online_shop/features/shop/brand/brandController.dart';
 import 'package:online_shop/features/shop/controller/category/categoryController.dart';
+import 'package:online_shop/features/shop/models/brandModel.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/catagoryTabs.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/store_primary_header.dart';
 import 'package:online_shop/utile/const/sizes.dart';
@@ -16,6 +19,7 @@ class shop_screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = categoryController.instance;
+    final brandContrlr = Get.put(brandController());
     // final dark = MyHeplerFunction.isDarkMode(context);
     return DefaultTabController(
       length: controller.featureCategories.length,
@@ -43,18 +47,30 @@ class shop_screen extends StatelessWidget {
 
                             SizedBox(
                               height: Mysize.brandCardHeight,
-                              child: ListView.separated(
-                                separatorBuilder: (context, index) =>
-                                    SizedBox(width: Mysize.spaceBtwItems),
-                                itemCount: 10,
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return SizedBox(
-                                    width: Mysize.brandCardWidth,
-                                    child: MyBrandCard(),
-                                  );
-                                },
+                              child: Obx(
+                                  (){
+                                    if(brandContrlr.isLoadingBrand.value){
+                                      return MyBrandShimmer();
+                                    }
+                                    if(brandContrlr.featureBrands.isEmpty){
+                                      return Text("Brands not found");
+                                    }
+
+                                    return ListView.separated(
+                                      separatorBuilder: (context, index) =>
+                                          SizedBox(width: Mysize.spaceBtwItems),
+                                      itemCount: brandContrlr.featureBrands.length,
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, index) {
+                                        BrandModel brand = brandContrlr.featureBrands[index];
+                                        return SizedBox(
+                                          width: Mysize.brandCardWidth,
+                                          child: MyBrandCard(brand: brand),
+                                        );
+                                      },
+                                    );
+                                  }
                               ),
                             ),
                           ],
