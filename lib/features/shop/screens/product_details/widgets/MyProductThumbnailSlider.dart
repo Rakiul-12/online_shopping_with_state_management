@@ -1,5 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:online_shop/features/shop/controller/productController/imageController.dart';
+import 'package:online_shop/features/shop/models/productModel.dart';
 import '../../../../../common/widgets/AppBar/CustomAppbar.dart';
 import '../../../../../common/widgets/Images/roundedImage.dart';
 import '../../../../../common/widgets/icons/circular_icon.dart';
@@ -9,14 +14,15 @@ import '../../../../../utile/const/sizes.dart';
 import '../../../../../utile/helpers/helper_functions.dart';
 
 class MyProductThumbnailSlider extends StatelessWidget {
-  const MyProductThumbnailSlider({
-    super.key,
-  });
+  const MyProductThumbnailSlider({super.key, required this.product});
 
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final dark = MyHelperFunction.isDarkMode(context);
+    final controller = Get.put(imageController());
+    List<String> images = controller.getAllProductImage(product);
     return Container(
       color: dark ? Mycolors.darkerGrey : Mycolors.light,
       child: Stack(
@@ -24,11 +30,20 @@ class MyProductThumbnailSlider extends StatelessWidget {
           SizedBox(
             height: 400,
             child: Padding(
-              padding: const EdgeInsets.all(
-                Mysize.productImageRadius * 2,
-              ),
+              padding: const EdgeInsets.all(Mysize.productImageRadius * 2),
               child: Center(
-                child: Image(image: AssetImage(MyImage.productImage4a)),
+                child: Obx(
+                  (){
+                    final image = controller.selectedProductImage.value;
+                    return GestureDetector(
+                      onTap: ()=> controller.showEnlargeImage(image),
+                      child: CachedNetworkImage(
+                        imageUrl: image,
+                        progressIndicatorBuilder: (context, url, progress) => CircularProgressIndicator(color: Mycolors.primary,value: progress.progress),
+                      ),
+                    );
+                  } 
+                ),
               ),
             ),
           ),
@@ -39,28 +54,31 @@ class MyProductThumbnailSlider extends StatelessWidget {
             child: SizedBox(
               height: 80,
               child: ListView.separated(
-                itemBuilder: (context, index) => MyRoundedImge(
-                  width: 80,
-                  backgroundColor: dark
-                      ? Mycolors.dark
-                      : Mycolors.white,
-                  padding: EdgeInsets.all(Mysize.sm),
-                  border: Border.all(color: Mycolors.primary),
-                  imageUrl: MyImage.productImage3,
+                itemBuilder: (context, index) => Obx(
+                  (){
+                    bool isSelected = controller.selectedProductImage.value == images[index];
+                    return MyRoundedImge(
+                      width: 80,
+                      backgroundColor: dark ? Mycolors.dark : Mycolors.white,
+                      padding: EdgeInsets.all(Mysize.sm),
+                      border: Border.all(color: isSelected ? Mycolors.primary : Colors.transparent),
+                      imageUrl: images[index],
+                      isNetworkImage: true,
+                      onPressed: () => controller.selectedProductImage.value = images[index],
+                    );
+                  }
                 ),
                 separatorBuilder: (context, index) =>
                     SizedBox(width: Mysize.spaceBtwItems),
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: 5,
+                itemCount: images.length,
               ),
             ),
           ),
           MyAppbar(
             showBackArrow: true,
-            actions: [
-              MyCircularIcon(icon: Iconsax.heart5, color: Colors.red),
-            ],
+            actions: [MyCircularIcon(icon: Iconsax.heart5, color: Colors.red)],
           ),
         ],
       ),

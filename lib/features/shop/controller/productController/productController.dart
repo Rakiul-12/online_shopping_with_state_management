@@ -78,4 +78,10 @@ class productController extends GetxController{
     }
   }
 
+
+  // Get product stock status
+  String getProductStockStatus(int stock){
+    return stock > 0 ? "In Stock" : "Out of Stock";
+  }
+
 }

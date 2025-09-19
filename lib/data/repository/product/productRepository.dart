@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:online_shop/data/service/cloudinaryService.dart';
@@ -22,42 +23,56 @@ class productRepository extends GetxController{
    // Function to upload list of product to firebase
   Future<void> uploadProducts(List<ProductModel> products)async{
     try{
-      for(ProductModel product in products){
-        File thumbnailsFile = await MyHelperFunction.assetToFile(product.thumbnail);
-        dio.Response response = await _cloudinaryService.uploadImage(thumbnailsFile, MyKeys.productFolder);
-        if(response.statusCode == 200){
-          product.thumbnail = response.data['url'];
+      for (ProductModel product in products) {
+        final Map<String, String> uploadedImageMap = {}; // 'assets/products/productImage4' : 'https:cloudinary'
+
+        // upload thumbnail to cloudinary
+        File thumbnailFile = await MyHelperFunction.assetToFile(product.thumbnail);
+        dio.Response response = await _cloudinaryService.uploadImage(thumbnailFile, MyKeys.productFolder);
+        if (response.statusCode == 200) {
+          String url = response.data['url'];
+          uploadedImageMap[product.thumbnail] = url;
+          product.thumbnail = url;
         }
 
-        // for upload image one by one
-        if(product.images != null && product.images!.isNotEmpty){
+        // upload product images
+        if (product.images != null && product.images!.isNotEmpty) {
           List<String> imageUrls = [];
 
-          for(String image in product.images!){
+          for (String image in product.images!) {
+            // upload image to cloudinary
             File imageFile = await MyHelperFunction.assetToFile(image);
             dio.Response response = await _cloudinaryService.uploadImage(imageFile, MyKeys.productFolder);
-            if(response.statusCode == 200){
-              imageUrls.add(response.data["url"]);
+            if (response.statusCode == 200) {
+              imageUrls.add(response.data['url']);
             }
           }
-          // update product variation image
-          for(final variation in product.productVariations ?? []){
-            int index = product.images!.indexWhere((image) => image == variation.image);
-            if(index != -1 && index < imageUrls.length ){
-              variation.image = imageUrls[index];
-            }else{
-              print("Variation image '${variation.image}' not found in product.images.");
+
+          // upload product variation images
+          if (product.productVariations != null && product.productVariations!.isNotEmpty) {
+            for (int i = 0; i < product.images!.length; i++) {
+              uploadedImageMap[product.images![i]] = imageUrls[i];
             }
 
+            for (final variation in product.productVariations!) {
+              final match = uploadedImageMap.entries.firstWhere(
+                    (entry) => entry.key == variation.image,
+                orElse: () => const MapEntry('', ''),
+              );
+              if (match.key.isNotEmpty) {
+                variation.image = match.value;
+              }
+            }
           }
-          // assign image urls to product
+
           product.images!.clear();
           product.images!.assignAll(imageUrls);
         }
 
+        // upload product to Fire store
         await _db.collection(MyKeys.productCollection).doc(product.id).set(product.toJson());
-        
-        print("Product ${product.id} uploaded");
+
+        debugPrint('Product ${product.id} uploaded');
       }
     }on FirebaseAuthException catch(e){
       throw MyFirebaseAuthException(e.code).message;

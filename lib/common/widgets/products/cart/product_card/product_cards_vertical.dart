@@ -30,7 +30,7 @@ class MyProductCardVertical extends StatelessWidget {
     String? salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
     return GestureDetector(
       onTap: () {
-        Get.to(()=>prodcut_details());
+        Get.to(()=>prodcut_details(product: product));
       },
       child: Container(
         width: 180,
