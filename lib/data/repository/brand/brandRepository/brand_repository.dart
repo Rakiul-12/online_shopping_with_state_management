@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:online_shop/data/service/cloudinaryService.dart';
+import 'package:online_shop/features/shop/models/brandCategoryModel.dart';
 import 'package:online_shop/features/shop/models/brandModel.dart';
 import 'package:online_shop/utile/const/keys.dart';
 import 'package:online_shop/utile/helpers/helper_functions.dart';
@@ -67,4 +68,40 @@ class brandRepository extends GetxController{
       throw "Something went wrong.Please try again";
     }
   }
+
+
+  // Function to get categories specific brand
+  Future<List<BrandModel>>fetchBrandForCategories(String categoryId)async{
+    try{
+
+      // Query to get all documents where categoryId matches the provided categoryId
+      final brandCategoryQuery = await _db.collection(MyKeys.brandCategoryCollection).where("categoryId",isEqualTo: categoryId).get();
+
+      // Convert document to model
+      List<BrandCategoryModel> brandCategories = brandCategoryQuery.docs.map((doc) => BrandCategoryModel.fromSnapshot(doc)).toList();
+
+      // extract brandIds from brandCategoryModel
+      List<String> brandIds = brandCategories.map((brandCategory) => brandCategory.brandId).toList();
+
+      // Query to get brands based on brandIds
+      final brandQuery = await _db.collection(MyKeys.brandCollection).where(FieldPath.documentId,whereIn: brandIds).limit(2).get();
+
+      // covert documents to model
+      List<BrandModel> brands = brandQuery.docs.map((doc) => BrandModel.fromSnapshot(doc)).toList();
+
+      return brands;
+    } on FirebaseAuthException catch(e){
+      throw MyFirebaseAuthException(e.code).message;
+    }on FirebaseException catch(e){
+      throw MyFirebaseException(e.code).message;
+    }on FormatException catch(_){
+      throw MyFormatException();
+    }on PlatformException catch(e){
+      throw MyPlatformException(e.code).message;
+    }catch(e){
+      throw "Something went wrong.Please try again";
+    }
+  }
+
+
 }

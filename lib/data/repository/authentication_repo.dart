@@ -34,7 +34,8 @@ class authentication_repo extends GetxController {
   void onReady() {
     FlutterNativeSplash.remove();
     screenRedirect();
-    // Get.put(productRepository()).uploadProducts(MyDummyData.products);
+    // Get.put(categoryRepository()).uploadBrandCategories(MyDummyData.brandCategory);
+    // Get.put(categoryRepository()).uploadProductCategories(MyDummyData.productCategory);
   }
 
   // function to redirect to the right screen

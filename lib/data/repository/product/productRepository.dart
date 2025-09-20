@@ -9,6 +9,7 @@ import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/utile/const/keys.dart';
 import 'package:online_shop/utile/helpers/helper_functions.dart';
 import 'package:dio/dio.dart'as dio;
+import 'package:online_shop/utile/popup/snackbarHelpers.dart';
 import '../../../utile/exceptions/firebase_auth_exceptions.dart';
 import '../../../utile/exceptions/firebase_exceptions.dart';
 import '../../../utile/exceptions/formate_exceptions.dart';
@@ -154,5 +155,30 @@ class productRepository extends GetxController{
      }catch(e){
        rethrow;
      }
+   }
+
+   // fucntion to fetch all list of brand specific products
+   Future<List<ProductModel>> getProductsForBeands({required String brandId, int limit = -1}) async {
+    try{
+      final query = limit == -1 ? await _db.collection(MyKeys.productCollection).where("brand.id",isEqualTo: brandId).get()
+      : await _db.collection(MyKeys.productCollection).where("brand.id",isEqualTo: brandId).limit(limit).get();
+
+      if(query.docs.isNotEmpty){
+        List<ProductModel> products = query.docs.map((document) => ProductModel.fromSnapshot(document)).toList();
+        return products;
+      }
+      return [];
+      
+    }on FirebaseAuthException catch(e){
+      throw MyFirebaseAuthException(e.code).message;
+    }on FirebaseException catch(e){
+      throw MyFirebaseException(e.code).message;
+    }on FormatException catch(_){
+      throw MyFormatException();
+    }on PlatformException catch(e){
+      throw MyPlatformException(e.code).message;
+    }catch(e){
+      rethrow;
+    }
    }
 }

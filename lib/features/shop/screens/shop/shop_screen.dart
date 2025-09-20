@@ -6,15 +6,19 @@ import 'package:online_shop/common/widgets/text/sectionHeading.dart';
 import 'package:online_shop/features/shop/brand/brandController.dart';
 import 'package:online_shop/features/shop/controller/category/categoryController.dart';
 import 'package:online_shop/features/shop/models/brandModel.dart';
+import 'package:online_shop/features/shop/models/catagoryModel.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/catagoryTabs.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/store_primary_header.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 import '../../../../common/brands/brandCards.dart';
 import '../../../../common/widgets/TabBar/TabBar.dart';
 import '../Brands/AllBrands.dart';
+import '../Brands/BrandProducts.dart';
 
 class shop_screen extends StatelessWidget {
   const shop_screen({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +70,11 @@ class shop_screen extends StatelessWidget {
                                         BrandModel brand = brandContrlr.featureBrands[index];
                                         return SizedBox(
                                           width: Mysize.brandCardWidth,
-                                          child: MyBrandCard(brand: brand),
+                                          child: MyBrandCard(brand: brand,onTap: () => Get.to(() => brandProdcuts(
+                                            title:
+                                            brand.name,
+                                            brand: brand,
+                                          )),),
                                         );
                                       },
                                     );
@@ -86,7 +94,7 @@ class shop_screen extends StatelessWidget {
             ];
           },
           body: TabBarView(
-            children: controller.featureCategories.map((element) => MyCatagoryTab(),).toList()
+            children: controller.featureCategories.map((category) => MyCatagoryTab(category: category),).toList()
           ),
         ),
       ),

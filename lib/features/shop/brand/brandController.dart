@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:online_shop/data/repository/brand/brandRepository/brand_repository.dart';
+import 'package:online_shop/data/repository/product/productRepository.dart';
 import 'package:online_shop/features/shop/models/brandModel.dart';
+import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/utile/popup/snackbarHelpers.dart';
 
 class brandController extends GetxController{
@@ -34,5 +36,30 @@ class brandController extends GetxController{
       isLoadingBrand.value = false;
     }
   }
+
+  // Get brand specific products
+  Future<List<ProductModel>> getBrandsProducts( String brandId , {int limit = -1}) async{
+    try{
+      List<ProductModel> products = await productRepository.instance.getProductsForBeands(brandId: brandId,limit: limit);
+      return products;
+
+    }catch(e){
+      MySnackBarHelpers.errorSnackBar(title: "Failed",message: e.toString());
+      return [];
+    }
+  }
+
+  // Get brand for specific category
+  Future<List<BrandModel>> getBrandsForCategory( String categoryId) async{
+    try{
+     final brands = await _brandRepo.fetchBrandForCategories(categoryId);
+     return brands;
+    }catch(e){
+      MySnackBarHelpers.errorSnackBar(title: "Failed",message: e.toString());
+      return [];
+    }
+  }
+
+
 
 }

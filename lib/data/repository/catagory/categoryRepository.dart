@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:online_shop/features/shop/models/brandCategoryModel.dart';
+import 'package:online_shop/features/shop/models/productCategoryModel.dart';
 import 'package:online_shop/utile/const/keys.dart';
 import 'package:online_shop/utile/helpers/helper_functions.dart';
 import '../../../features/shop/models/catagoryModel.dart';
@@ -45,7 +47,6 @@ class categoryRepository extends GetxController{
     
   }
 
-
   // Function to fetch list of categories
   Future<List<CategoryModel>> getAllCategories() async{
     try{
@@ -69,5 +70,43 @@ class categoryRepository extends GetxController{
       throw 'Something went wrong. Please try again';
     }
   }
+
+  // Function to upload list of brand category
+  Future<void> uploadBrandCategories(List<BrandCategoryModel> brandCategories) async{
+    try{
+      for(final brandCategory in brandCategories){
+        await _db.collection(MyKeys.brandCategoryCollection).doc().set(brandCategory.toJson());
+      }
+
+    }on FirebaseException catch(e){
+      throw MyFirebaseException(e.code).message;
+    } on FormatException catch(_){
+      throw MyFormatException();
+    } on PlatformException catch(e){
+      throw MyPlatformException(e.code).message;
+    } catch(e){
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  // Function to upload list of brand category
+  Future<void> uploadProductCategories(List<ProductCategoryModel> productCategories) async{
+    try{
+      for(final productCategory in productCategories){
+        await _db.collection(MyKeys.productCategoryCollection).doc().set(productCategory.toJson());
+      }
+
+    }on FirebaseException catch(e){
+      throw MyFirebaseException(e.code).message;
+    } on FormatException catch(_){
+      throw MyFormatException();
+    } on PlatformException catch(e){
+      throw MyPlatformException(e.code).message;
+    } catch(e){
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+
 
 }
