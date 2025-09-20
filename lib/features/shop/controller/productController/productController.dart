@@ -20,6 +20,7 @@ class productController extends GetxController{
     getFeaturedProduct();
   }
 
+  // get only 4 product
   Future<void> getFeaturedProduct() async{
     try{
 
@@ -82,6 +83,20 @@ class productController extends GetxController{
   // Get product stock status
   String getProductStockStatus(int stock){
     return stock > 0 ? "In Stock" : "Out of Stock";
+  }
+
+  // get all featured product
+  Future<List<ProductModel>> getAllFeaturedProduct() async{
+    try{
+
+
+      List<ProductModel> featuredProducts = await _productRepo.fetchAllProducts();
+      return featuredProducts;
+
+    }catch(e){
+      MySnackBarHelpers.errorSnackBar(title: "Failed",message: e.toString());
+      return [];
+    }
   }
 
 }

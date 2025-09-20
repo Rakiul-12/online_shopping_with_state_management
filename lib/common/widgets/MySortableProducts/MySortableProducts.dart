@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/features/shop/models/productModel.dart';
-
+import '../../../features/shop/controller/productController/allProductController.dart';
 import '../../../utile/const/sizes.dart';
 import '../layouts/grid_layout.dart';
 import '../products/cart/product_card/product_cards_vertical.dart';
@@ -10,16 +10,22 @@ import '../products/cart/product_card/product_cards_vertical.dart';
 class MySortableProducts extends StatelessWidget {
   const MySortableProducts({
     super.key,
+    required this.product,
   });
 
+
+  final List<ProductModel> product;
   @override
   Widget build(BuildContext context) {
+    final controller = AllProductController.instance;
+    controller.assignProducts(product);
     return Column(
       children: [
         DropdownButtonFormField(
+          value: controller.selectedSortOption.value,
           decoration: InputDecoration(prefixIcon: Icon(Iconsax.sort)),
-          onChanged: (value) {},
-          items: ["Name", "Lower Price", "Higher Price", "Sale", "Newest"]
+          onChanged: (value) => controller.sortProducts(value!),
+          items: ["Name", "Lower Price", "Higher Price", "Newest", "Sale"]
               .map((filter) {
             return DropdownMenuItem(
               value: filter,
@@ -29,7 +35,7 @@ class MySortableProducts extends StatelessWidget {
               .toList(),
         ),
         SizedBox(height: Mysize.spaceBtwSections,),
-        MyGridLayout(itemCount: 10, itemBuilder: (context, index) => MyProductCardVertical(product: ProductModel.empty()))
+        Obx(()=> MyGridLayout(itemCount: controller.products.length, itemBuilder: (context, index) => MyProductCardVertical(product: controller.products[index])))
       ],
     );
   }

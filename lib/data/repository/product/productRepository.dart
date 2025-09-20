@@ -15,7 +15,7 @@ import '../../../utile/exceptions/formate_exceptions.dart';
 import '../../../utile/exceptions/platform_exceptions.dart';
 
 class productRepository extends GetxController{
-   productRepository get instance => Get.find();
+   static productRepository get instance => Get.find();
 
    final _db = FirebaseFirestore.instance;
    final _cloudinaryService = Get.put(cloudinaryServices());
@@ -93,6 +93,52 @@ class productRepository extends GetxController{
        final query = await _db.collection(MyKeys.productCollection).where("isFeatured",isEqualTo: true).limit(4).get();
        if(query.docs.isNotEmpty){
          List<ProductModel> products = query.docs.map((document) => ProductModel.fromSnapshot(document)).toList();
+         return products;
+       }
+       return [];
+
+     }on FirebaseAuthException catch(e){
+       throw MyFirebaseAuthException(e.code).message;
+     }on FirebaseException catch(e){
+       throw MyFirebaseException(e.code).message;
+     }on FormatException catch(_){
+       throw MyFormatException();
+     }on PlatformException catch(e){
+       throw MyPlatformException(e.code).message;
+     }catch(e){
+       rethrow;
+     }
+   }
+
+   // Function to fetch all list of product to firebase
+   Future<List<ProductModel>> fetchAllProducts()async{
+     try{
+       final query = await _db.collection(MyKeys.productCollection).where("isFeatured",isEqualTo: true).get();
+       if(query.docs.isNotEmpty){
+         List<ProductModel> products = query.docs.map((document) => ProductModel.fromSnapshot(document)).toList();
+         return products;
+       }
+       return [];
+
+     }on FirebaseAuthException catch(e){
+       throw MyFirebaseAuthException(e.code).message;
+     }on FirebaseException catch(e){
+       throw MyFirebaseException(e.code).message;
+     }on FormatException catch(_){
+       throw MyFormatException();
+     }on PlatformException catch(e){
+       throw MyPlatformException(e.code).message;
+     }catch(e){
+       rethrow;
+     }
+   }
+
+   // Function to fetch all list of product to firebase
+   Future<List<ProductModel>> fetchProductsByQuery(Query query)async{
+     try{
+       final querySnapshot = await query.get();
+       if(querySnapshot.docs.isNotEmpty){
+         List<ProductModel> products = querySnapshot.docs.map((document) => ProductModel.fromQuerySnapshot(document)).toList();
          return products;
        }
        return [];

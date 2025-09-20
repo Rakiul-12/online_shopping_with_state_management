@@ -21,7 +21,7 @@ class brandProdcuts extends StatelessWidget {
         child: Padding(padding: MyPadding.screenPadding,child: Column(children: [
           MyBrandCard(brand: BrandModel.empty(),),
           SizedBox(height: Mysize.spaceBtwItems),
-          MySortableProducts()
+          MySortableProducts(product: [],)
         ],),),
       ),
     );

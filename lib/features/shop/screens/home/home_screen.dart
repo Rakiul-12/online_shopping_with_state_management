@@ -65,7 +65,10 @@ class home_screen extends StatelessWidget {
                    SizedBox(height: Mysize.md,),
                    MySectionHeading(
                      title: MyText.HomeScreenPopularProduct,
-                     onPressed: ()=> Get.to(()=>AllProdcuts()),
+                     onPressed: ()=> Get.to(()=>AllProdcuts(
+                       title: "Popular Products",
+                       futureMethod: Product_Controller.getAllFeaturedProduct(),
+                     )),
                    ),
                   SizedBox(height: Mysize.spaceBtwItems,),
 
