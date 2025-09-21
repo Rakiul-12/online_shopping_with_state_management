@@ -12,6 +12,7 @@ class MyKeys{
   static String productCollection ="Products";
   static String productCategoryCollection ="productCategoryCollection";
   static String brandCategoryCollection ="brandCategoryCollection";
+  static String addressCollection ="UserAddress";
 
   static String cloudName ="diumcbq4a";
   static String uploadPreset ="upload_image";

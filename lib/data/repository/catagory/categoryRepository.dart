@@ -108,10 +108,10 @@ class categoryRepository extends GetxController{
   }
 
   // Function to fetch list of sub categories
-  Future<List<CategoryModel>> getSubCategories(String categoryId ) async{
+  Future<List<CategoryModel>> getSubCategories(String categoryId) async{
     try{
 
-      final query = await _db.collection(MyKeys.categoriesCollection).where("patentId",isEqualTo: categoryId).get();
+      final query = await _db.collection(MyKeys.categoriesCollection).where('parentId', isEqualTo: categoryId).get();
 
       if(query.docs.isNotEmpty){
         List<CategoryModel> categories = query.docs.map((document) => CategoryModel.fromSnapshot(document)).toList();

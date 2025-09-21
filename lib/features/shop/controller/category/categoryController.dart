@@ -9,9 +9,7 @@ class categoryController extends GetxController{
   static categoryController get instance => Get.find();
 
   final _repository = Get.put(categoryRepository());
-
   RxList<CategoryModel> allCategories = <CategoryModel>[].obs;
-
   RxList<CategoryModel> featureCategories = <CategoryModel>[].obs;
   RxBool isCategoryLoading = false.obs;
 
@@ -60,6 +58,7 @@ class categoryController extends GetxController{
   Future<List<CategoryModel>> getSubCategory (String categoryId)async{
     try{
       final subCategories = await _repository.getSubCategories(categoryId);
+      print("Category : $subCategories");
       return subCategories;
     }catch(e){
       MySnackBarHelpers.errorSnackBar(title: "Failed",message: e.toString());
