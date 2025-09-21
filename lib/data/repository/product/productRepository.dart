@@ -157,10 +157,11 @@ class productRepository extends GetxController{
      }
    }
 
-   // fucntion to fetch all list of brand specific products
-   Future<List<ProductModel>> getProductsForBeands({required String brandId, int limit = -1}) async {
+   // function to fetch all list of brand specific products
+   Future<List<ProductModel>> getProductsForBrands({required String brandId, int limit = -1}) async {
     try{
-      final query = limit == -1 ? await _db.collection(MyKeys.productCollection).where("brand.id",isEqualTo: brandId).get()
+      final query = limit == -1 ?
+      await _db.collection(MyKeys.productCollection).where("brand.id",isEqualTo: brandId).get()
       : await _db.collection(MyKeys.productCollection).where("brand.id",isEqualTo: brandId).limit(limit).get();
 
       if(query.docs.isNotEmpty){
@@ -168,7 +169,7 @@ class productRepository extends GetxController{
         return products;
       }
       return [];
-      
+
     }on FirebaseAuthException catch(e){
       throw MyFirebaseAuthException(e.code).message;
     }on FirebaseException catch(e){
@@ -180,5 +181,54 @@ class productRepository extends GetxController{
     }catch(e){
       rethrow;
     }
+   }
+
+   // function to fetch all list of category specific products
+   Future<List<ProductModel>> getProductsForCategory({required String categoryId, int limit = -1}) async {
+     try{
+
+       final productCategoryQuery = limit == -1 ?
+       await _db.collection(MyKeys.productCategoryCollection).where("categoryId",isEqualTo: categoryId).get()
+       : await _db.collection(MyKeys.productCategoryCollection).where("categoryId",isEqualTo: categoryId).limit(limit).get();
+       List<String> productIds = productCategoryQuery.docs.map((doc) => doc["productId"] as String).toList();
+       final productQuery = await _db.collection(MyKeys.productCollection).where(FieldPath.documentId, whereIn: productIds).get();
+       List<ProductModel> products = productQuery.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+       return products;
+
+     }on FirebaseAuthException catch(e){
+       throw MyFirebaseAuthException(e.code).message;
+     }on FirebaseException catch(e){
+       throw MyFirebaseException(e.code).message;
+     }on FormatException catch(_){
+       throw MyFormatException();
+     }on PlatformException catch(e){
+       throw MyPlatformException(e.code).message;
+     }catch(e){
+       rethrow;
+     }
+   }
+
+   // function to fetch  list of favourite products
+   Future<List<ProductModel>> getFavouriteProducts(List<String> productIds) async {
+     try{
+       final query = await _db.collection(MyKeys.productCollection).where(FieldPath.documentId,whereIn: productIds).get();
+
+       if(query.docs.isNotEmpty){
+         List<ProductModel> products = query.docs.map((document) => ProductModel.fromSnapshot(document)).toList();
+         return products;
+       }
+       return [];
+
+     }on FirebaseAuthException catch(e){
+       throw MyFirebaseAuthException(e.code).message;
+     }on FirebaseException catch(e){
+       throw MyFirebaseException(e.code).message;
+     }on FormatException catch(_){
+       throw MyFormatException();
+     }on PlatformException catch(e){
+       throw MyPlatformException(e.code).message;
+     }catch(e){
+       rethrow;
+     }
    }
 }

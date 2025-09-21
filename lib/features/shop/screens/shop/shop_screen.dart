@@ -71,8 +71,7 @@ class shop_screen extends StatelessWidget {
                                         return SizedBox(
                                           width: Mysize.brandCardWidth,
                                           child: MyBrandCard(brand: brand,onTap: () => Get.to(() => brandProdcuts(
-                                            title:
-                                            brand.name,
+                                            title:brand.name,
                                             brand: brand,
                                           )),),
                                         );

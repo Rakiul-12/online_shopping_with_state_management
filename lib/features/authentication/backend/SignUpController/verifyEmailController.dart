@@ -21,7 +21,7 @@ class verifyEmailController extends GetxController {
   // send mail for verifiaction
   Future<void> sendEmailVerification() async {
     try {
-      await authentication_repo.instance.sendEmailToVerification();
+      await AuthenticationRepository.instance.sendEmailToVerification();
       MySnackBarHelpers.successSnackBar(
         title: "Email sent",
         message: "Please check your email and verify your email!",
@@ -44,7 +44,7 @@ class verifyEmailController extends GetxController {
             title: MyText.accountCreateTitle,
             subtitle: MyText.accountCreateSubTitle,
             image: MyImage.successfulPaymentIcon,
-            onPressed: () => authentication_repo.instance.screenRedirect(),
+            onPressed: () => AuthenticationRepository.instance.screenRedirect(),
           ),
         );
       }
@@ -61,7 +61,7 @@ class verifyEmailController extends GetxController {
             title: MyText.accountCreateTitle,
             subtitle: MyText.accountCreateSubTitle,
             image: MyImage.successfulPaymentIcon,
-            onPressed: () => authentication_repo.instance.screenRedirect(),
+            onPressed: () => AuthenticationRepository.instance.screenRedirect(),
           ),
         );
       }

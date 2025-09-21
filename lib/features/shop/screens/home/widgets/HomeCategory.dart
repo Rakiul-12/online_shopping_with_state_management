@@ -51,7 +51,7 @@ class MyHomeCategory extends StatelessWidget {
                     title: category.name,
                     image: category.image,
                     textColor: Mycolors.white,
-                    onPressed: () => Get.to(() => subCatagory()),
+                    onPressed: () => Get.to(() => subCatagory(category: category)),
                   );
                 },
               ),

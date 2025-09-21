@@ -63,11 +63,11 @@ class loginController extends GetxController{
 
 
       // logIn User
-      await authentication_repo.instance.loginWithEmailAndPass(email.text.trim(), pass.text.trim());
+      await AuthenticationRepository.instance.loginWithEmailAndPass(email.text.trim(), pass.text.trim());
       MyFullScreenLoader.stopLoading();
 
       // screen redirection
-      authentication_repo.instance.screenRedirect();
+      AuthenticationRepository.instance.screenRedirect();
 
     }catch(e){
       MyFullScreenLoader.stopLoading();
@@ -87,13 +87,13 @@ class loginController extends GetxController{
         return;
       }
 
-      UserCredential userCredential = await authentication_repo.instance.signInWithGoogle();
+      UserCredential userCredential = await AuthenticationRepository.instance.signInWithGoogle();
 
       // Save user record
       await _userController.saveUserRecord(userCredential);
       MyFullScreenLoader.stopLoading();
 
-      authentication_repo.instance.screenRedirect();
+      AuthenticationRepository.instance.screenRedirect();
     }catch(e){
       MyFullScreenLoader.stopLoading();
       MySnackBarHelpers.errorSnackBar(title: "Login Failed",message: e.toString());

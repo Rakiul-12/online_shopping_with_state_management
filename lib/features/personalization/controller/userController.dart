@@ -104,7 +104,7 @@ class userController extends GetxController {
     try{
       MyFullScreenLoader.openLoadingDialog("Processing...");
 
-      final authRepository = authentication_repo.instance;
+      final authRepository = AuthenticationRepository.instance;
       final provider = authRepository.currentUser!.providerData.map((e) => e.providerId).first;
 
       // if user login with google
@@ -141,8 +141,8 @@ class userController extends GetxController {
         return;
       }
       // delete account
-        await authentication_repo.instance.reauthenticateUserWithEmailAndPassword(email.text.trim(), pass.text.trim());
-        await authentication_repo.instance.deleteAccount();
+        await AuthenticationRepository.instance.reauthenticateUserWithEmailAndPassword(email.text.trim(), pass.text.trim());
+        await AuthenticationRepository.instance.deleteAccount();
         MyFullScreenLoader.stopLoading();
         Get.offAll(()=>logInScreen());
     }catch(e){

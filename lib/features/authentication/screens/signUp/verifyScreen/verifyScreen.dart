@@ -23,7 +23,7 @@ class verifyScrreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed:authentication_repo.instance.logoutUser,
+            onPressed:AuthenticationRepository.instance.logoutUser,
             icon: Icon(CupertinoIcons.clear),
           ),
         ],

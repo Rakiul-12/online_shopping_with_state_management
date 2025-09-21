@@ -46,8 +46,7 @@ class Allbrands extends StatelessWidget {
                       final brand = controller.allBrands[index];
                       return MyBrandCard(
                         onTap: () => Get.to(() => brandProdcuts(
-                          title:
-                          brand.name,
+                          title:brand.name,
                           brand: brand,
                         )),
                         brand: brand,

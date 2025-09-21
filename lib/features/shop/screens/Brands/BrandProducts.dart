@@ -36,7 +36,7 @@ class brandProdcuts extends StatelessWidget {
               Widget ? widget = myCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot,loader: loader);
               if(widget != null) return widget;
 
-              List<ProductModel> products = snapshot.data!;
+              final products = snapshot.data!;
               return MySortableProducts(product: products);
             }
           )

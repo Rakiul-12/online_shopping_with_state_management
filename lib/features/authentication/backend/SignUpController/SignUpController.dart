@@ -56,7 +56,7 @@ class SignUpController extends GetxController {
       }
 
       // Register user with firebase
-      UserCredential userCredential = await authentication_repo.instance.registerUser(
+      UserCredential userCredential = await AuthenticationRepository.instance.registerUser(
           email.text.trim(), pass.text.trim());
 
       // Create user modal

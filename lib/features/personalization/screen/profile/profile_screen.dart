@@ -49,7 +49,7 @@ class profile_screen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                        onPressed: authentication_repo.instance.logoutUser,
+                        onPressed: AuthenticationRepository.instance.logoutUser,
                         child: Text("Logout")
                     ),
                   ),

@@ -17,7 +17,7 @@ Future<void> main() async {
   await GetStorage.init();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value){
-    Get.put(authentication_repo());
+    Get.put(AuthenticationRepository());
   });
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

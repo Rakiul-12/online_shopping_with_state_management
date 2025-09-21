@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:online_shop/data/repository/product/productRepository.dart';
 import 'package:online_shop/features/shop/models/catagoryModel.dart';
+import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/utile/popup/snackbarHelpers.dart';
 import '../../../../data/repository/catagory/categoryRepository.dart';
 
@@ -40,6 +42,28 @@ class categoryController extends GetxController{
       MySnackBarHelpers.errorSnackBar(title: "Failed",message: e.toString());
     }finally{
       isCategoryLoading.value = false;
+    }
+  }
+
+  // Get category products
+  Future<List<ProductModel>> getCategoryProducts({required String categoryId, int limit = 4}) async {
+    try{
+      final products = productRepository.instance.getProductsForCategory(categoryId: categoryId,limit: limit);
+      return products;
+    }catch(e){
+      MySnackBarHelpers.errorSnackBar(title: "Failed",message: e.toString());
+      return [];
+    }
+  }
+
+  // get sub categories of selected category
+  Future<List<CategoryModel>> getSubCategory (String categoryId)async{
+    try{
+      final subCategories = await _repository.getSubCategories(categoryId);
+      return subCategories;
+    }catch(e){
+      MySnackBarHelpers.errorSnackBar(title: "Failed",message: e.toString());
+      return [];
     }
   }
 }

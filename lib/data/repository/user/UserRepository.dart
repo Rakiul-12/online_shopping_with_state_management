@@ -46,7 +46,7 @@ class UserRepository extends GetxController {
     try {
       final documentSnapshot = await _Db.collection(
         MyKeys.userCollection,
-      ).doc(authentication_repo.instance.currentUser!.uid).get();
+      ).doc(AuthenticationRepository.instance.currentUser!.uid).get();
 
       if (documentSnapshot.exists) {
         UserModel user = UserModel.fromSnapshot(documentSnapshot);
@@ -69,7 +69,7 @@ class UserRepository extends GetxController {
   // update user details in single filed to Db
   Future<void> updateSingleField(Map<String,dynamic>map) async {
     try {
-      _Db.collection(MyKeys.userCollection).doc(authentication_repo.instance.currentUser!.uid).update(map);
+      _Db.collection(MyKeys.userCollection).doc(AuthenticationRepository.instance.currentUser!.uid).update(map);
     } on FirebaseAuthException catch (e) {
       throw MyFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {

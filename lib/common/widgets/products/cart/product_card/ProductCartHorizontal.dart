@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:online_shop/common/widgets/products/favourite/favouriteIcon.dart';
 import 'package:online_shop/common/widgets/text/brandTitleWithVerifyIcon.dart';
 import 'package:online_shop/common/widgets/text/productText.dart';
 import 'package:online_shop/common/widgets/text/product_price.dart';
@@ -64,7 +65,7 @@ class NewCartProductHorizontal extends StatelessWidget {
                 Positioned(
                   right: -5,
                   top: -10,
-                  child: MyCircularIcon(icon: Iconsax.heart),
+                  child: FavouriteIcon(productId: ""),
                 )
               ],
             ),

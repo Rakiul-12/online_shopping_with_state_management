@@ -6,6 +6,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/common/widgets/Images/roundedImage.dart';
 import 'package:online_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:online_shop/common/widgets/icons/circular_icon.dart';
+import 'package:online_shop/common/widgets/products/favourite/favouriteIcon.dart';
 import 'package:online_shop/features/shop/controller/productController/productController.dart';
 import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/features/shop/screens/product_details/product_details.dart';
@@ -72,7 +73,7 @@ class MyProductCardVertical extends StatelessWidget {
                   Positioned(
                     right: -5,
                     top: -10,
-                    child: MyCircularIcon(icon: Iconsax.heart),
+                    child: FavouriteIcon(productId: product.id,)
                   ),
                 ],
               ),

@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:online_shop/common/widgets/shimmer/MyVerticalProductShimmer.dart';
 import 'package:online_shop/features/shop/controller/category/categoryController.dart';
 import 'package:online_shop/features/shop/models/catagoryModel.dart';
 import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/features/shop/screens/all_Products/AllProducts.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/categoryBrands.dart';
+import 'package:online_shop/utile/helpers/cloudHelperFunction.dart';
 import '../../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../../common/widgets/products/cart/product_card/product_cards_vertical.dart';
 import '../../../../../common/widgets/text/sectionHeading.dart';
@@ -33,14 +35,27 @@ class MyCatagoryTab extends StatelessWidget {
                 onPressed: () =>
                     Get.to(() => AllProdcuts(
                         title: category.name,
+                      futureMethod: controller.getCategoryProducts(categoryId: category.id,limit: -1),
                     )),
 
               ),
-              MyGridLayout(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return MyProductCardVertical(product: ProductModel.empty());
-                },
+              FutureBuilder(
+                  future: controller.getCategoryProducts(categoryId: category.id,),
+                  builder: (context, snapshot) {
+
+                    final loader = MyVerticalProductShimmer();
+                    final widget = myCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot,loader: loader);
+                    if(widget != null) return widget;
+                    final products =snapshot.data!;
+
+                    return MyGridLayout(
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        final product = products[index];
+                        return MyProductCardVertical(product: product);
+                      },
+                    );
+                  },
               ),
               SizedBox(height: Mysize.spaceBtwItems),
             ],

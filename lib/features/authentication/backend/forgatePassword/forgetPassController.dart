@@ -32,7 +32,7 @@ class forgetPassController extends GetxController{
       }
 
       // send mail to reset password
-      authentication_repo.instance.sendEmailToRestPassword(email.text.trim());
+      AuthenticationRepository.instance.sendEmailToRestPassword(email.text.trim());
       MyFullScreenLoader.stopLoading();
       MySnackBarHelpers.successSnackBar(title: "Email sent",message: "Email link sent to reset your password");
       Get.to(()=> resetPasswordScreen(email: email.text.trim()));
@@ -56,7 +56,7 @@ class forgetPassController extends GetxController{
       }
 
       // send mail to reset password
-      authentication_repo.instance.sendEmailToRestPassword(email.text);
+      AuthenticationRepository.instance.sendEmailToRestPassword(email.text);
       MyFullScreenLoader.stopLoading();
       MySnackBarHelpers.successSnackBar(title: "Email sent",message: "Email link sent to reset your password");
 

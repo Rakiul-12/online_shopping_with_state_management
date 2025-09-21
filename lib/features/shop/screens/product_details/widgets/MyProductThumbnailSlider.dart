@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:online_shop/common/widgets/products/favourite/favouriteIcon.dart';
 import 'package:online_shop/features/shop/controller/productController/imageController.dart';
 import 'package:online_shop/features/shop/models/productModel.dart';
 import '../../../../../common/widgets/AppBar/CustomAppbar.dart';
 import '../../../../../common/widgets/Images/roundedImage.dart';
 import '../../../../../common/widgets/icons/circular_icon.dart';
 import '../../../../../utile/const/colors.dart';
-import '../../../../../utile/const/image.dart';
 import '../../../../../utile/const/sizes.dart';
 import '../../../../../utile/helpers/helper_functions.dart';
 
@@ -78,7 +78,7 @@ class MyProductThumbnailSlider extends StatelessWidget {
           ),
           MyAppbar(
             showBackArrow: true,
-            actions: [MyCircularIcon(icon: Iconsax.heart5, color: Colors.red)],
+            actions: [FavouriteIcon(productId: product.id,)],
           ),
         ],
       ),

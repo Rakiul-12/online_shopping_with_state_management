@@ -22,10 +22,10 @@ import 'package:online_shop/utile/exceptions/platform_exceptions.dart';
 import 'catagory/categoryRepository.dart';
 
 
-class authentication_repo extends GetxController {
-  static authentication_repo get instance => Get.find();
+class AuthenticationRepository extends GetxController {
+  static AuthenticationRepository get instance => Get.find();
 
-  final Localstorage = GetStorage();
+  final LocalStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
 
   User? get currentUser =>_auth.currentUser;
@@ -34,17 +34,17 @@ class authentication_repo extends GetxController {
   void onReady() {
     FlutterNativeSplash.remove();
     screenRedirect();
-    // Get.put(categoryRepository()).uploadBrandCategories(MyDummyData.brandCategory);
     // Get.put(categoryRepository()).uploadProductCategories(MyDummyData.productCategory);
   }
 
   // function to redirect to the right screen
-  void screenRedirect() {
+  Future<void> screenRedirect() async {
     final user = _auth.currentUser;
     if(user != null){
       // if user is verify
       if(user.emailVerified){
         Get.offAll(()=>navigationMenuScreen());
+        await GetStorage.init(user.uid);
       }
       // if user is not verify
       else{
@@ -52,10 +52,10 @@ class authentication_repo extends GetxController {
       }
     }else{
       // write isFirstTime if Null
-      Localstorage.writeIfNull("isFirstTime", true);
+      LocalStorage.writeIfNull("isFirstTime", true);
 
       // check if user is first time
-      Localstorage.read("isFirstTime") != true
+      LocalStorage.read("isFirstTime") != true
           ? Get.to(() => logInScreen())
           : Get.to(() => onBoadingScreen());
     }

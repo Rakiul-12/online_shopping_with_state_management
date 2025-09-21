@@ -10,6 +10,7 @@ class MyImage{
 
   // loading animation
   static const String loadingAnimation = "assets/animations/loading.json";
+  static const String pencilAnimation = "assets/animations/pencil_animation.json";
 
 
 

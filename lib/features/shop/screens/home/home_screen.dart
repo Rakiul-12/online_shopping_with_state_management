@@ -32,7 +32,7 @@ class home_screen extends StatelessWidget {
           children: [
 
 
-            // Herader section
+            // Header section
             Stack(
               children: [
                 SizedBox(height: Mysize.homePrimaryHeaderHeight + 10),
