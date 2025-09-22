@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:online_shop/common/widgets/Button/addToCartButton.dart';
 import 'package:online_shop/common/widgets/Images/roundedImage.dart';
 import 'package:online_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:online_shop/common/widgets/icons/circular_icon.dart';
@@ -98,18 +99,7 @@ class MyProductCardVertical extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   MyProductPriceText(price: controller.getProductPrice(product)),
-                  Container(
-                    width: Mysize.iconLg * 1.2,
-                    height: Mysize.iconLg * 1.2,
-                    decoration: BoxDecoration(
-                      color: Mycolors.primary,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(Mysize.cardRadiusMd),
-                        bottomRight: Radius.circular(Mysize.productImageRadius),
-                      ),
-                    ),
-                    child: Icon(Iconsax.add, color: Mycolors.white),
-                  ),
+                  AddToCartButton(product: product,)
                 ],
               ),
             ),

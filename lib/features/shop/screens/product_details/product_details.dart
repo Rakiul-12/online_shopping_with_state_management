@@ -55,7 +55,7 @@ class prodcut_details extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: addToCartSection(),
+      bottomNavigationBar: addToCartSection(product: product),
 
     );
   }

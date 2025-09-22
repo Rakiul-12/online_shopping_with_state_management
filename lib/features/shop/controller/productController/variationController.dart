@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:online_shop/features/shop/controller/cart/cartController.dart';
 import 'package:online_shop/features/shop/controller/productController/imageController.dart';
 import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/features/shop/models/productVariationModel.dart';
@@ -7,9 +8,7 @@ class variationController extends GetxController {
   static variationController get instance => Get.find();
 
   RxMap selectedAttributes = {}.obs;
-  Rx<ProductVariationModel> selectedVariation = ProductVariationModel
-      .empty()
-      .obs;
+  Rx<ProductVariationModel> selectedVariation = ProductVariationModel.empty().obs;
   RxString variationStockStatus = ''.obs;
 
 
@@ -29,6 +28,11 @@ class variationController extends GetxController {
     if (selectedVariation.image.isNotEmpty) {
       imageController.instance.selectedProductImage.value =
           selectedVariation.image;
+    }
+
+    if(selectedVariation.id.isNotEmpty){
+      final cartController = CartController.instance;
+      cartController.productQuantityInCart.value = cartController.getVariationQuantityInCart(product.id, selectedVariation.id);
     }
 
     // assign selected variation to Rx variable
@@ -71,4 +75,12 @@ class variationController extends GetxController {
     variationStockStatus.value =
     selectedVariation.value.stock > 0 ? "In Stock" : "Out of Stock";
   }
+
+  // reset selected attributes when switching products
+  void resetSelectedAttributes(){
+    selectedAttributes.clear();
+    variationStockStatus.value = '';
+    selectedVariation.value = ProductVariationModel.empty();
+  }
+
 }

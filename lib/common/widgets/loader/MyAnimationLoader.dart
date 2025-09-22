@@ -29,30 +29,32 @@ class MyAnimationLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          /// Animation
-          Lottie.asset(animation, width: Get.width * 0.8),
-          const SizedBox(height: Mysize.defaultSpace),
-
-          /// Title
-          Text(text, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
-          const SizedBox(height: Mysize.defaultSpace),
-
-          showActionButton ?
-          SizedBox(
-              width : 250,
-              child: OutlinedButton(
-                onPressed: onActionPressed,
-                style: OutlinedButton.styleFrom(backgroundColor: Mycolors.dark),
-                child: Text(
-                  actionText!,
-                  style: Theme.of(context).textTheme.bodyMedium!.apply(color: Mycolors.light),
-                ),
-              )
-          ) : SizedBox()
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            /// Animation
+            Lottie.asset(animation, width: Get.width * 0.8),
+            const SizedBox(height: Mysize.defaultSpace),
+        
+            /// Title
+            Text(text, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
+            const SizedBox(height: Mysize.defaultSpace),
+        
+            showActionButton ?
+            SizedBox(
+                width : 250,
+                child: OutlinedButton(
+                  onPressed: onActionPressed,
+                  style: OutlinedButton.styleFrom(backgroundColor: Mycolors.dark),
+                  child: Text(
+                    actionText!,
+                    style: Theme.of(context).textTheme.bodyMedium!.apply(color: Mycolors.light),
+                  ),
+                )
+            ) : SizedBox()
+          ],
+        ),
       ),
     );
   }

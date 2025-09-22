@@ -2,6 +2,7 @@ class MyKeys{
   MyKeys._();
 
   static String userCollection = "Users";
+  static String cartItemsKey = "cartItems";
   static String rememberMeEmail = "rememberemail";
   static String rememberMePass = "rememberpass";
 
