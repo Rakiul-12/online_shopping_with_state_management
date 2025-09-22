@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:online_shop/data/repository/authentication_repo.dart';
@@ -15,16 +14,44 @@ class CartController extends GetxController{
 
 
   final _storage = GetStorage(AuthenticationRepository.instance.currentUser!.uid);
-  RxInt numberOfCartItem = 0.obs;
+  RxInt noOfCartItem = 0.obs;
   RxDouble totalCartPrice = 0.0.obs;
   RxInt productQuantityInCart = 0.obs;
   RxList<CartItemModel> cartItems = <CartItemModel>[].obs;
-  final _variationController = variationController.instance;
+  final VariationController = variationController.instance;
+
 
   // for see the already buy items
   CartController(){
     loadCartItems();
   }
+
+  // load all cart items from local storage
+  void loadCartItems() {
+    List<dynamic>? storedCartItems = _storage.read(MyKeys.cartItemsKey);
+    if (storedCartItems != null) {
+      List<CartItemModel> loadedItems = storedCartItems.map((item) {
+        if (item is Map<String, dynamic>) {
+          return CartItemModel.fromJson(item);
+        } else {
+          return CartItemModel.fromJson(Map<String, dynamic>.from(item as Map));
+        }
+      }).toList();
+
+      // Assign to cartItems
+      cartItems.assignAll(loadedItems);
+
+      // Debug print
+      print("Loaded cart items: $loadedItems");
+
+      // Update totals
+      updateCartTotals();
+    } else {
+      print("No items found in storage");
+    }
+  }
+
+
   // add items in the cart
   void addToCart(ProductModel product){
 
@@ -35,14 +62,14 @@ class CartController extends GetxController{
     }
 
     // check variation of product if it is variable product
-    if(product.productType == ProductType.variable.toString() && _variationController.selectedVariation.value.id.isEmpty){
+    if(product.productType == ProductType.variable.toString() && VariationController.selectedVariation.value.id.isEmpty){
       MySnackBarHelpers.customToast(message: "Selected Variation");
       return;
     }
 
     // out of stock status
     if(product.productType == ProductType.variable.toString()){
-      if(_variationController.selectedVariation.value.stock < 1 ){
+      if(VariationController.selectedVariation.value.stock < 1 ){
         MySnackBarHelpers.warningSnackBar(title: "Out Of Stock",message: "This variation is out of stock");
         return;
       }
@@ -68,57 +95,6 @@ class CartController extends GetxController{
     MySnackBarHelpers.customToast(message: "Your product has been added to the cart");
   }
 
-  void updateCart(){
-    updateCartTotals();
-    saveCartItem();
-    cartItems.refresh();
-  }
-
-  // save cart item to local storage
-  void saveCartItem(){
-    List<Map<String, dynamic>> cartItemsList = cartItems.map((items) => items.toJson()).toList();
-    // print("Saved item : $cartItemsList");
-    _storage.write(MyKeys.cartItemsKey, cartItemsList);
-  }
-
-  // update total price and number of cart items in the cart
-  void updateCartTotals(){
-    double calculateTotalPrice = 0.0;
-    int calculateNumberOfCartItem = 0;
-
-    for(final item in cartItems){
-      calculateTotalPrice += (item.price) * item.quantity.toDouble();
-      calculateNumberOfCartItem += item.quantity;
-    }
-    totalCartPrice.value = calculateTotalPrice;
-    numberOfCartItem.value = calculateNumberOfCartItem;
-  }
-
-  // convert product model to cart item model
-  CartItemModel convertToCartItem (ProductModel product, int quantity){
-    if(product.productType == ProductType.single.toString()){
-      // reset variation in case of single product type
-      _variationController.resetSelectedAttributes();
-    }
-    ProductVariationModel variation = _variationController.selectedVariation.value;
-    bool isVariation = variation.id.isNotEmpty;
-    String image = isVariation ? variation.image : product.thumbnail;
-    double price = isVariation ? variation.salePrice >  0.0 ? variation.salePrice : variation.price
-        : product.salePrice > 0.0 ? product.salePrice : product.price;
-
-    return CartItemModel(
-        productId: product.id,
-        quantity: quantity,
-        title: product.title,
-        brandName:  product.brand != null ? product.brand!.name : '',
-        image: image,
-        price: price,
-        selectedVariation: isVariation ? variation.attributeValues : null,
-        variationId: variation.id
-
-    );
-  }
-  
   // add one item to cart
   void addOneItemToCart(CartItemModel item){
     int index = cartItems.indexWhere((cartItem) => item.productId == cartItem.productId && item.variationId == cartItem.variationId);
@@ -146,15 +122,15 @@ class CartController extends GetxController{
   // show dialog to remove item from the cart
   void removeFromCartDialog(int index){
     Get.defaultDialog(
-      title: "Remove Product",
-      middleText: "Are you sure you want to remove this product",
-      onConfirm: (){
-        cartItems.removeAt(index);
-        updateCart();
-        MySnackBarHelpers.customToast(message: "Product removed from the cart");
-        Get.back();
-      },
-      onCancel: (){}
+        title: "Remove Product",
+        middleText: "Are you sure you want to remove this product",
+        onConfirm: (){
+          cartItems.removeAt(index);
+          updateCart();
+          MySnackBarHelpers.customToast(message: "Product removed from the cart");
+          Get.back();
+        },
+        onCancel: (){}
     );
   }
 
@@ -174,6 +150,58 @@ class CartController extends GetxController{
     return cartItemModel.quantity;
   }
 
+  // updateCart
+  void updateCart(){
+    updateCartTotals();
+    saveCartItem();
+    cartItems.refresh();
+  }
+
+  // save cart item to local storage
+  void saveCartItem(){
+    List<Map<String, dynamic>> cartItemsList = cartItems.map((item) => item.toJson()).toList();
+    // print("Saved item : $cartItemsList");
+    _storage.write(MyKeys.cartItemsKey, cartItemsList);
+  }
+
+  // update total price and number of cart items in the cart
+  void updateCartTotals(){
+    double calculateTotalPrice = 0.0;
+    int calculateNumberOfCartItem = 0;
+
+    for(final item in cartItems){
+      calculateTotalPrice += (item.price) * item.quantity.toDouble();
+      calculateNumberOfCartItem += item.quantity;
+    }
+    totalCartPrice.value = calculateTotalPrice;
+    noOfCartItem.value = calculateNumberOfCartItem;
+  }
+
+  // convert product model to cart item model
+  CartItemModel convertToCartItem (ProductModel product, int quantity){
+    if(product.productType == ProductType.single.toString()){
+      // reset variation in case of single product type
+      VariationController.resetSelectedAttributes();
+    }
+    ProductVariationModel variation = VariationController.selectedVariation.value;
+    bool isVariation = variation.id.isNotEmpty;
+    String image = isVariation ? variation.image : product.thumbnail;
+    double price = isVariation ? variation.salePrice >  0.0 ? variation.salePrice : variation.price
+        : product.salePrice > 0.0 ? product.salePrice : product.price;
+
+    return CartItemModel(
+        productId: product.id,
+        quantity: quantity,
+        title: product.title,
+        brandName:  product.brand != null ? product.brand!.name : '',
+        image: image,
+        price: price,
+        selectedVariation: isVariation ? variation.attributeValues : null,
+        variationId: variation.id
+
+    );
+  }
+
   // clear the cart
   void clearCart(){
     productQuantityInCart.value = 0;
@@ -186,7 +214,7 @@ class CartController extends GetxController{
     if(product.productType == ProductType.single.toString()){
       productQuantityInCart.value = getProductQuantityInCart(product.id);
     }else{
-      String variationId = _variationController.selectedVariation.value.id;
+      String variationId = VariationController.selectedVariation.value.id;
       if(variationId.isNotEmpty){
         productQuantityInCart.value = getVariationQuantityInCart(product.id, variationId);
       }else{
@@ -195,13 +223,7 @@ class CartController extends GetxController{
     }
   }
 
-  // load all cart items from local storage
-  void loadCartItems(){
-    List<dynamic>? storedCartItems = _storage.read(MyKeys.cartItemsKey);
-    // print("Stored item : ${storedCartItems}");
-    if(storedCartItems != null){
-      cartItems.assignAll(storedCartItems.map((item) => CartItemModel.fromJson(item as Map<String, dynamic>)));
-      updateCartTotals();
-    }
-  }
+
+
+
 }

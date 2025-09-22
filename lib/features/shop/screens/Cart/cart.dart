@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/common/widgets/AppBar/CustomAppbar.dart';
 import 'package:online_shop/common/widgets/Button/elevatedButton.dart';
+import 'package:online_shop/common/widgets/icons/circular_icon.dart';
 import 'package:online_shop/common/widgets/loader/MyAnimationLoader.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
 import 'package:online_shop/features/shop/controller/cart/cartController.dart';
@@ -21,6 +23,9 @@ class cartScreen extends StatelessWidget {
       appBar: MyAppbar(
         showBackArrow: true,
         title: Text("Cart", style: Theme.of(context).textTheme.headlineMedium),
+        actions: [
+          MyCircularIcon(icon: Iconsax.box_remove,onPressed: ()=>controller.clearCart(),)
+        ],
       ),
       body: Obx(() {
 

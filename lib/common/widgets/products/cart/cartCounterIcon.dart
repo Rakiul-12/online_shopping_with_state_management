@@ -6,10 +6,7 @@ import 'package:online_shop/features/shop/screens/Cart/cart.dart';
 import '../../../../utile/const/colors.dart';
 
 class MyCardCounterIcon extends StatelessWidget {
-  const MyCardCounterIcon({
-    super.key,
-    required this.dark,
-  });
+  const MyCardCounterIcon({super.key, required this.dark});
 
   final bool dark;
 
@@ -18,27 +15,32 @@ class MyCardCounterIcon extends StatelessWidget {
     final controller = Get.put(CartController());
     return Stack(
       children: [
-        IconButton(onPressed: ()=> Get.to(()=>cartScreen()),
-            icon: Icon(Iconsax.shopping_bag,color: Mycolors.light,)),
+        IconButton(
+          onPressed: () => Get.to(() => cartScreen()),
+          icon: Icon(Iconsax.shopping_bag, color: Mycolors.light),
+        ),
         Positioned(
           right: 6.0,
           child: Container(
             height: 18,
             width: 18,
             decoration: BoxDecoration(
-                color: dark ? Mycolors.light : Mycolors.light,
-                shape: BoxShape.circle
+              color: dark ? Mycolors.light : Mycolors.light,
+              shape: BoxShape.circle,
             ),
             child: Center(
               child: Obx(
-                        ()=> Text(controller.numberOfCartItem.value.toString(),style: Theme.of(context).textTheme.labelLarge!.apply(
+                () => Text(
+                  controller.noOfCartItem.value.toString(),
+                  style: Theme.of(context).textTheme.labelLarge!.apply(
                     fontSizeFactor: 0.8,
-                    color: dark ? Mycolors.dark : Mycolors.dark
-                ),),
+                    color: dark ? Mycolors.dark : Mycolors.dark,
+                  ),
+                ),
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

@@ -70,7 +70,7 @@ class variationController extends GetxController {
     selectedVariation.value.price).toStringAsFixed(0);
   }
 
-  // check product variation stock satus
+  // check product variation stock status
   void getProductVariationStockStatus() {
     variationStockStatus.value =
     selectedVariation.value.stock > 0 ? "In Stock" : "Out of Stock";

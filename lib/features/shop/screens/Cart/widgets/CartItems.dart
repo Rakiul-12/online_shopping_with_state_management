@@ -14,40 +14,39 @@ class MyCardItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = CartController.instance;
-    return ListView.separated(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: controller.cartItems.length,
-      itemBuilder: (context, index) {
-        return Obx(
-            (){
-              final cartItem = controller.cartItems[index];
-              return Column(
-                children: [
-                  MyCardItem(cartItem: cartItem,),
+    return Obx(
+        ()=> ListView.separated(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: controller.cartItems.length,
+        itemBuilder: (context, index) {
+          final cartItem = controller.cartItems[index];
+          return Column(
+            children: [
+              MyCardItem(cartItem: cartItem,),
 
-                  // price and counter item
-                  if (showAddRemoveBtn) SizedBox(height: Mysize.spaceBtwItems),
-                  if (showAddRemoveBtn)
-                    Row(
-                      children: [
-                        SizedBox(width: 70),
-                        MyProductQuantityAddAndRemove(
-                          quantity: cartItem.quantity,
-                          add: ()=>controller.addOneItemToCart(cartItem),
-                          remove: ()=>controller.removeOneItemToCart(cartItem),
-                        ),
-                        Spacer(),
-                        MyProductPriceText(price:( cartItem.price * cartItem.quantity).toStringAsFixed(0)),
-                      ],
+              // price and counter item
+              if (showAddRemoveBtn) SizedBox(height: Mysize.spaceBtwItems),
+              if (showAddRemoveBtn)
+                Row(
+                  children: [
+                    SizedBox(width: 70),
+                    MyProductQuantityAddAndRemove(
+                      quantity: cartItem.quantity,
+                      add: ()=>controller.addOneItemToCart(cartItem),
+                      remove: ()=>controller.removeOneItemToCart(cartItem),
                     ),
-                ],
-              );
-            }
-        );
-      },
-      separatorBuilder: (context, index) =>
-          SizedBox(height: Mysize.spaceBtwSections),
+                    Spacer(),
+                    MyProductPriceText(price:( cartItem.price * cartItem.quantity).toStringAsFixed(0)),
+                  ],
+                ),
+            ],
+          );
+
+        },
+        separatorBuilder: (context, index) =>
+            SizedBox(height: Mysize.spaceBtwSections),
+      ),
     );
   }
 }
