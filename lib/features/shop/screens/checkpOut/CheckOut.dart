@@ -6,6 +6,7 @@ import 'package:online_shop/common/widgets/Button/elevatedButton.dart';
 import 'package:online_shop/common/widgets/Screens/success_screen.dart';
 import 'package:online_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
+import 'package:online_shop/features/shop/controller/cart/cartController.dart';
 import 'package:online_shop/features/shop/screens/Cart/widgets/CartItems.dart';
 import 'package:online_shop/features/shop/screens/checkpOut/widgets/MyAmountBillingSection.dart';
 import 'package:online_shop/features/shop/screens/checkpOut/widgets/MyBillingAddressSection.dart';
@@ -13,6 +14,8 @@ import 'package:online_shop/features/shop/screens/checkpOut/widgets/MyPaymentBil
 import 'package:online_shop/navigation_menu.dart';
 import 'package:online_shop/utile/const/image.dart';
 import 'package:online_shop/utile/const/sizes.dart';
+import 'package:online_shop/utile/const/text.dart';
+import 'package:online_shop/utile/helpers/pricingCalculator.dart';
 
 import '../../../../common/widgets/textfield/MyPromoCodeField.dart';
 
@@ -21,7 +24,9 @@ class checkOutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final dark = MyHeplerFunction.isDarkMode(context);
+    final cartController = CartController.instance;
+    double subTotal = cartController.totalCartPrice.value;
+    double total = MyPricingCalculator.calculateTotalPrice(subTotal, "Bangladesh");
     return Scaffold(
       appBar: MyAppbar(
         showBackArrow: true,
@@ -71,7 +76,7 @@ class checkOutScreen extends StatelessWidget {
               onPressed: ()=>Get.offAll(()=>navigationMenuScreen()),
             ),
           ),
-          child: Text("Checkout \$6000"),
+          child: Text("Checkout ${MyText.currency}${total}"),
         ),
       ),
     );

@@ -51,7 +51,6 @@ class CartController extends GetxController{
     }
   }
 
-
   // add items in the cart
   void addToCart(ProductModel product){
 

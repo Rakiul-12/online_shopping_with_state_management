@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:online_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
+import 'package:online_shop/features/shop/controller/checkout/checkOutController.dart';
+import 'package:online_shop/features/shop/models/paymentMethodModel.dart';
 import 'package:online_shop/utile/const/colors.dart';
 import 'package:online_shop/utile/const/image.dart';
 import 'package:online_shop/utile/const/sizes.dart';
@@ -12,26 +16,29 @@ class MyPaymentBillingSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = MyHelperFunction.isDarkMode(context);
+    final controller = Get.put(CheckOutController());
     return Column(
       children: [
         MySectionHeading(
           title: "Payment Method",
           buttontitle: "Change",
-          onPressed: () {}
+          onPressed: () => controller.selectPaymentMethod(context)
         ),
         SizedBox(height: Mysize.spaceBtwItems / 2,),
-        Row(
-          children: [
-            MyRoundedContainer(
-              width: 60,
-              height: 35,
-              backgroundColor: dark ? Mycolors.light : Mycolors.white,
-              padding: EdgeInsets.all(Mysize.sm),
-              child: Image(image: AssetImage(MyImage.masterCard)),
-            ),
-            SizedBox(width: Mysize.spaceBtwItems / 2),
-            Text("Master Card",style: Theme.of(context).textTheme.bodyLarge)
-          ],
+        Obx(
+          ()=> Row(
+            children: [
+              MyRoundedContainer(
+                width: 60,
+                height: 35,
+                backgroundColor: dark ? Mycolors.light : Mycolors.white,
+                padding: EdgeInsets.all(Mysize.sm),
+                child: Image(image: AssetImage(controller.selectedPaymentMethod.value.image),fit: BoxFit.contain,),
+              ),
+              SizedBox(width: Mysize.spaceBtwItems / 2),
+              Text(controller.selectedPaymentMethod.value.name,style: Theme.of(context).textTheme.bodyLarge)
+            ],
+          ),
         )
       ],
     );
