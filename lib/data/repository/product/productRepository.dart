@@ -9,7 +9,6 @@ import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/utile/const/keys.dart';
 import 'package:online_shop/utile/helpers/helper_functions.dart';
 import 'package:dio/dio.dart'as dio;
-import 'package:online_shop/utile/popup/snackbarHelpers.dart';
 import '../../../utile/exceptions/firebase_auth_exceptions.dart';
 import '../../../utile/exceptions/firebase_exceptions.dart';
 import '../../../utile/exceptions/formate_exceptions.dart';
@@ -213,6 +212,29 @@ class productRepository extends GetxController{
      try{
        final query = await _db.collection(MyKeys.productCollection).where(FieldPath.documentId,whereIn: productIds).get();
 
+       if(query.docs.isNotEmpty){
+         List<ProductModel> products = query.docs.map((document) => ProductModel.fromSnapshot(document)).toList();
+         return products;
+       }
+       return [];
+
+     }on FirebaseAuthException catch(e){
+       throw MyFirebaseAuthException(e.code).message;
+     }on FirebaseException catch(e){
+       throw MyFirebaseException(e.code).message;
+     }on FormatException catch(_){
+       throw MyFormatException();
+     }on PlatformException catch(e){
+       throw MyPlatformException(e.code).message;
+     }catch(e){
+       rethrow;
+     }
+   }
+
+   // Function to fetch all list of product for searchScreen to firebase
+   Future<List<ProductModel>> fetchAllProductsForSearch()async{
+     try{
+       final query = await _db.collection(MyKeys.productCollection).get();
        if(query.docs.isNotEmpty){
          List<ProductModel> products = query.docs.map((document) => ProductModel.fromSnapshot(document)).toList();
          return products;

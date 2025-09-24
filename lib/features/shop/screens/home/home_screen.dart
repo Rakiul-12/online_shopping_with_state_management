@@ -8,7 +8,6 @@ import 'package:online_shop/features/shop/screens/home/widgets/HomeCategory.dart
 import 'package:online_shop/features/shop/screens/home/widgets/homeAppBar.dart';
 import 'package:online_shop/common/widgets/custom_shapes/primary_home_container.dart';
 import 'package:online_shop/features/shop/screens/home/widgets/promoSlider.dart';
-import 'package:online_shop/utile/const/image.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/const/text.dart';
 import 'package:online_shop/utile/helpers/helper_functions.dart';

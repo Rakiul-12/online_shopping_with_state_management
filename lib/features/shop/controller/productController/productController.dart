@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:get/get.dart';
 import 'package:online_shop/data/repository/product/productRepository.dart';
 import 'package:online_shop/features/shop/models/productModel.dart';
@@ -99,4 +97,14 @@ class productController extends GetxController{
     }
   }
 
+  // function to get all products
+  Future<List<ProductModel>> getAllProducts()async{
+    try{
+      List<ProductModel> products = await _productRepo.fetchAllProductsForSearch();
+      return products;
+    }catch(e){
+      MySnackBarHelpers.errorSnackBar(title: "Error",message: e.toString());
+      return [];
+    }
+  }
 }

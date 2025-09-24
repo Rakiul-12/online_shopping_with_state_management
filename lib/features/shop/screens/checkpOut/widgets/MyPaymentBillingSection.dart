@@ -4,9 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:online_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
 import 'package:online_shop/features/shop/controller/checkout/checkOutController.dart';
-import 'package:online_shop/features/shop/models/paymentMethodModel.dart';
 import 'package:online_shop/utile/const/colors.dart';
-import 'package:online_shop/utile/const/image.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/helpers/helper_functions.dart';
 

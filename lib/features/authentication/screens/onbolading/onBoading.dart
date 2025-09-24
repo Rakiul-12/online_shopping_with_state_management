@@ -10,8 +10,8 @@ import 'package:online_shop/utile/const/image.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/const/text.dart';
 
-class onBoadingScreen extends StatelessWidget {
-  const onBoadingScreen({super.key});
+class OnBoardingScreen extends StatelessWidget {
+  const OnBoardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

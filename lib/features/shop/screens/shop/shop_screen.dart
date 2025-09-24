@@ -6,7 +6,6 @@ import 'package:online_shop/common/widgets/text/sectionHeading.dart';
 import 'package:online_shop/features/shop/brand/brandController.dart';
 import 'package:online_shop/features/shop/controller/category/categoryController.dart';
 import 'package:online_shop/features/shop/models/brandModel.dart';
-import 'package:online_shop/features/shop/models/catagoryModel.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/catagoryTabs.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/store_primary_header.dart';
 import 'package:online_shop/utile/const/sizes.dart';

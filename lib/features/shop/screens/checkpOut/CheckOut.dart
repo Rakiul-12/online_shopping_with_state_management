@@ -17,8 +17,8 @@ import 'package:online_shop/utile/helpers/pricingCalculator.dart';
 import 'package:online_shop/utile/popup/snackbarHelpers.dart';
 import '../../../../common/widgets/textfield/MyPromoCodeField.dart';
 
-class checkOutScreen extends StatelessWidget {
-  const checkOutScreen({super.key});
+class CheckOutScreen extends StatelessWidget {
+  const CheckOutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

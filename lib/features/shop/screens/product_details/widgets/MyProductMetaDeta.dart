@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:online_shop/features/shop/controller/productController/productController.dart';
 import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/utile/const/enums.dart';
-import 'package:online_shop/utile/const/keys.dart';
 import 'package:online_shop/utile/const/text.dart';
 import '../../../../../common/widgets/Images/circular_imae.dart';
 import '../../../../../common/widgets/custom_shapes/rounded_container.dart';
@@ -10,7 +9,6 @@ import '../../../../../common/widgets/text/brandTitleWithVerifyIcon.dart';
 import '../../../../../common/widgets/text/productText.dart';
 import '../../../../../common/widgets/text/product_price.dart';
 import '../../../../../utile/const/colors.dart';
-import '../../../../../utile/const/image.dart';
 import '../../../../../utile/const/sizes.dart';
 
 class MyProductMetaDeta extends StatelessWidget {

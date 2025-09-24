@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:online_shop/common/widgets/Button/addToCartButton.dart';
 import 'package:online_shop/common/widgets/products/favourite/favouriteIcon.dart';
 import 'package:online_shop/common/widgets/text/brandTitleWithVerifyIcon.dart';
@@ -10,12 +9,10 @@ import 'package:online_shop/features/shop/models/productModel.dart';
 import '../../../../../features/shop/controller/productController/productController.dart';
 import '../../../../../features/shop/screens/product_details/product_details.dart';
 import '../../../../../utile/const/colors.dart';
-import '../../../../../utile/const/image.dart';
 import '../../../../../utile/const/sizes.dart';
 import '../../../../../utile/helpers/helper_functions.dart';
 import '../../../Images/roundedImage.dart';
 import '../../../custom_shapes/rounded_container.dart';
-import '../../../icons/circular_icon.dart';
 
 class NewCartProductHorizontal extends StatelessWidget {
   const NewCartProductHorizontal({

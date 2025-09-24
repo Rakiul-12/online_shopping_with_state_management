@@ -3,11 +3,9 @@ import 'package:get/get.dart';
 import 'package:online_shop/common/brands/brandCards.dart';
 import 'package:online_shop/common/widgets/AppBar/CustomAppbar.dart';
 import 'package:online_shop/common/widgets/layouts/grid_layout.dart';
-import 'package:online_shop/common/widgets/shimmer/brandShimmerEffect.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
 import 'package:online_shop/features/shop/brand/brandController.dart';
-import 'package:online_shop/features/shop/models/brandModel.dart';
 import 'package:online_shop/features/shop/screens/Brands/BrandProducts.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 

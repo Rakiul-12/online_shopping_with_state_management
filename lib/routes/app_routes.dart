@@ -20,7 +20,7 @@ class MyAppRoutes{
     GetPage(name: MyRoutes.shop, page: () => shop_screen(),),
     GetPage(name: MyRoutes.wishlist, page: () => wishlist_screen(),),
     GetPage(name: MyRoutes.profile, page: () => profile_screen(),),
-    GetPage(name: MyRoutes.checkout, page: () => checkOutScreen(),),
+    GetPage(name: MyRoutes.checkout, page: () => CheckOutScreen(),),
     GetPage(name: MyRoutes.cart, page: () => cartScreen(),),
     GetPage(name: MyRoutes.editProfile, page: () => edit_profile(),),
     GetPage(name: MyRoutes.userAddress, page: () =>UserAddress(),),
@@ -28,6 +28,6 @@ class MyAppRoutes{
     GetPage(name: MyRoutes.verifyEmail, page: () => verifyScrreen(),),
     GetPage(name: MyRoutes.signIn, page: () => logInScreen(),),
     GetPage(name: MyRoutes.forgetPassword, page: () => forgotPass(),),
-    GetPage(name: MyRoutes.onBoarding, page: () => onBoadingScreen(),),
+    GetPage(name: MyRoutes.onBoarding, page: () => OnBoardingScreen(),),
   ];
 }

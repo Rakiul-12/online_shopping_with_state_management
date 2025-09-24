@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart'as dio;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:online_shop/data/repository/authentication_repo.dart';
 import 'package:online_shop/features/authentication/models/user_modal.dart';
-import 'package:online_shop/utile/const/apis.dart';
 import 'package:online_shop/utile/const/keys.dart';
 import '../../../utile/exceptions/firebase_auth_exceptions.dart';
 import '../../../utile/exceptions/firebase_exceptions.dart';

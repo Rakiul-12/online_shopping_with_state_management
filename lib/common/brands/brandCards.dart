@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../features/shop/models/brandModel.dart';
 import '../../utile/const/enums.dart';
-import '../../utile/const/image.dart';
 import '../../utile/const/sizes.dart';
 import '../widgets/Images/roundedImage.dart';
 import '../widgets/custom_shapes/rounded_container.dart';

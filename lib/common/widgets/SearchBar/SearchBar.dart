@@ -22,20 +22,23 @@ class MySearchBar extends StatelessWidget {
         left: Mysize.spaceBtwSections,
         child: GestureDetector(
           onTap:()=> Get.to(()=> SearchStoreScreen()),
-          child: Container(
-            height: Mysize.searchBarHeight,
-            padding: EdgeInsets.symmetric(horizontal: Mysize.md),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Mysize.buttonRadius),
-                color: dark ? Mycolors.dark : Mycolors.light,
-                boxShadow: MyShadow.searchBarShadow
-            ),
-            child: Row(
-              children: [
-                Icon(Iconsax.search_normal,color: Mycolors.darkGrey,),
-                SizedBox(width: Mysize.spaceBtwItems,),
-                Text(MyText.HomeScreenSearchBar,style: Theme.of(context).textTheme.bodySmall)
-              ],
+          child: Hero(
+            tag: "search_products",
+            child: Container(
+              height: Mysize.searchBarHeight,
+              padding: EdgeInsets.symmetric(horizontal: Mysize.md),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Mysize.buttonRadius),
+                  color: dark ? Mycolors.dark : Mycolors.light,
+                  boxShadow: MyShadow.searchBarShadow
+              ),
+              child: Row(
+                children: [
+                  Icon(Iconsax.search_normal,color: Mycolors.darkGrey,),
+                  SizedBox(width: Mysize.spaceBtwItems,),
+                  Text(MyText.HomeScreenSearchBar,style: Theme.of(context).textTheme.bodySmall)
+                ],
+              ),
             ),
           ),
         )

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:online_shop/common/widgets/shimmer/boxsShimmer.dart';
-import 'package:online_shop/common/widgets/shimmer/listTileShimmer.dart';
 import 'package:online_shop/features/shop/brand/brandController.dart';
 import 'package:online_shop/features/shop/models/catagoryModel.dart';
-import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/helpers/cloudHelperFunction.dart';
 import '../../../../../common/brands/MyBrandShowCase.dart';
-import '../../../../../utile/const/image.dart';
+
 
 class categoryBrands extends StatelessWidget {
   const categoryBrands({super.key, required this.category});

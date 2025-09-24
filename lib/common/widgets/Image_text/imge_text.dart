@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/common/widgets/Images/circular_imae.dart';
-import '../../../utile/const/colors.dart';
 import '../../../utile/const/sizes.dart';
 import '../../../utile/helpers/helper_functions.dart';
-import '../custom_shapes/circuler_container.dart';
+
 
 class MyVerticaLImageText extends StatelessWidget {
   const MyVerticaLImageText({
@@ -22,7 +21,7 @@ class MyVerticaLImageText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dark = MyHelperFunction.isDarkMode(context);
+    MyHelperFunction.isDarkMode(context);
     return GestureDetector(
       onTap: onPressed,
       child: Column(

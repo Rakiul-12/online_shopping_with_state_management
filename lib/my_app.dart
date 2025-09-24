@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: Mytheme.lightTheme,
       darkTheme: Mytheme.darkTheme,
       initialBinding: MyBindings(),
-      home: onBoadingScreen(),
+      home: OnBoardingScreen(),
     );
   }
 }

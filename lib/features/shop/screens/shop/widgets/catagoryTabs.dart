@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:online_shop/common/widgets/shimmer/MyVerticalProductShimmer.dart';
 import 'package:online_shop/features/shop/controller/category/categoryController.dart';
 import 'package:online_shop/features/shop/models/catagoryModel.dart';
-import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/features/shop/screens/all_Products/AllProducts.dart';
 import 'package:online_shop/features/shop/screens/shop/widgets/categoryBrands.dart';
 import 'package:online_shop/utile/helpers/cloudHelperFunction.dart';

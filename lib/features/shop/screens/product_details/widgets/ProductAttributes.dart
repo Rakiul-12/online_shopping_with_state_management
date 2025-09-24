@@ -8,14 +8,13 @@ import 'package:online_shop/common/widgets/text/sectionHeading.dart';
 import 'package:online_shop/features/shop/controller/productController/variationController.dart';
 import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/utile/const/colors.dart';
-import 'package:online_shop/utile/const/keys.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/const/text.dart';
 import '../../../../../common/widgets/Chips/choicheChips.dart';
 import '../../../../../utile/helpers/helper_functions.dart';
 
-class productAttributes extends StatelessWidget {
-  const productAttributes({super.key, required this.product});
+class ProductAttributes extends StatelessWidget {
+  const ProductAttributes({super.key, required this.product});
 
   final ProductModel product;
 

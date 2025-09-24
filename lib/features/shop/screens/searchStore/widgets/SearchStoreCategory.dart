@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as Controller;
 import 'package:online_shop/features/shop/models/catagoryModel.dart';
 import 'package:online_shop/features/shop/screens/all_Products/AllProducts.dart';
 import '../../../../../common/widgets/Images/roundedImage.dart';
 import '../../../../../common/widgets/text/sectionHeading.dart';
-import '../../../../../utile/const/image.dart';
 import '../../../../../utile/const/sizes.dart';
 import '../../../controller/category/categoryController.dart';
 
@@ -34,10 +32,10 @@ class SearchStoreCategory extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final categories = category[index];
                   return ListTile(
-                    leading: MyRoundedImge(
-                      onPressed: ()=> Get.to(()=> AllProdcuts(title: categories.name,
-                        futureMethod: controller.getCategoryProducts(categoryId: categories.id),
-                      )),
+                    onTap: ()=> Get.to(()=> AllProdcuts(title: categories.name,
+                      futureMethod: controller.getCategoryProducts(categoryId: categories.id),
+                    )),
+                      leading: MyRoundedImge(
                       imageUrl: categories.image,
                       isNetworkImage: true,
                       borderRadius: 0,

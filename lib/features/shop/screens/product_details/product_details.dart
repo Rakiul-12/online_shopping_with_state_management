@@ -31,7 +31,7 @@ class prodcut_details extends StatelessWidget {
                   MyProductMetaDeta(product: product),
                   SizedBox(height: Mysize.spaceBtwItems),
                   if(product.productType == ProductType.variable.toString())...[
-                    productAttributes(product: product),
+                    ProductAttributes(product: product),
                     SizedBox(height: Mysize.spaceBtwSections,),
                   ],
 
