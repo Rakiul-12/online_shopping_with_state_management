@@ -5,6 +5,7 @@ class MyKeys{
   static String cartItemsKey = "cartItems";
   static String rememberMeEmail = "rememberemail";
   static String rememberMePass = "rememberpass";
+  static String orderCollection = "Orders";
 
 
   static String categoriesCollection ="Categories";

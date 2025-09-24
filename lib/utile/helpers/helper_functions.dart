@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 
 class MyHelperFunction{
@@ -52,6 +52,7 @@ class MyHelperFunction{
     }
   }
 
+
   static String getGreetingMessage() {
     final hour = DateTime.now().hour;
 
@@ -66,6 +67,7 @@ class MyHelperFunction{
     }
   }
 
+
   // function to convert asset file to file
   static Future<File> assetToFile (String assetPath ) async {
     // load asset bytes
@@ -78,5 +80,10 @@ class MyHelperFunction{
     // write bytes to temp file
     await file.writeAsBytes(byteData.buffer.asUint8List());
     return file;
+  }
+
+
+  static String getFormattedDate(DateTime date, {String format = 'dd MMM yyy'}){
+    return DateFormat(format).format(date);
   }
 }

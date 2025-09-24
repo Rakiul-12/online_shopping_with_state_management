@@ -3,20 +3,18 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:online_shop/common/widgets/AppBar/CustomAppbar.dart';
 import 'package:online_shop/common/widgets/Button/elevatedButton.dart';
-import 'package:online_shop/common/widgets/Screens/success_screen.dart';
 import 'package:online_shop/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
 import 'package:online_shop/features/shop/controller/cart/cartController.dart';
+import 'package:online_shop/features/shop/controller/order/orderController.dart';
 import 'package:online_shop/features/shop/screens/Cart/widgets/CartItems.dart';
 import 'package:online_shop/features/shop/screens/checkpOut/widgets/MyAmountBillingSection.dart';
 import 'package:online_shop/features/shop/screens/checkpOut/widgets/MyBillingAddressSection.dart';
 import 'package:online_shop/features/shop/screens/checkpOut/widgets/MyPaymentBillingSection.dart';
-import 'package:online_shop/navigation_menu.dart';
-import 'package:online_shop/utile/const/image.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/const/text.dart';
 import 'package:online_shop/utile/helpers/pricingCalculator.dart';
-
+import 'package:online_shop/utile/popup/snackbarHelpers.dart';
 import '../../../../common/widgets/textfield/MyPromoCodeField.dart';
 
 class checkOutScreen extends StatelessWidget {
@@ -25,8 +23,12 @@ class checkOutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartController = CartController.instance;
+    final orderController = Get.put(OrderController());
     double subTotal = cartController.totalCartPrice.value;
-    double total = MyPricingCalculator.calculateTotalPrice(subTotal, "Bangladesh");
+    double total = MyPricingCalculator.calculateTotalPrice(
+      subTotal,
+      "Bangladesh",
+    );
     return Scaffold(
       appBar: MyAppbar(
         showBackArrow: true,
@@ -43,7 +45,6 @@ class checkOutScreen extends StatelessWidget {
               MyCardItems(showAddRemoveBtn: false),
               SizedBox(height: Mysize.spaceBtwSections),
               MyPromoCodeFiled(),
-              SizedBox(height: Mysize.spaceBtwItems),
 
               // Billing Section
               MyRoundedContainer(
@@ -68,14 +69,13 @@ class checkOutScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(Mysize.defaultSpace),
         child: MyElevatedButton(
-          onPressed: () => Get.to(
-            () => success_screen(
-              title: "Payment Success!",
-              subtitle: "Your item will be shipped soon!",
-              image: MyImage.successfulPaymentIcon,
-              onPressed: ()=>Get.offAll(()=>navigationMenuScreen()),
-            ),
-          ),
+          onPressed:
+          subTotal > 0
+              ? () => orderController.processOrder(total)
+              : () => MySnackBarHelpers.errorSnackBar(
+                  title: "Empty cart",
+                  message: "Add items in the cart",
+                ),
           child: Text("Checkout ${MyText.currency}${total}"),
         ),
       ),
