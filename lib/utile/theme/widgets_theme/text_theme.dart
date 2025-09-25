@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop/utile/const/colors.dart';
 
-class MyText_theme{
-  MyText_theme._();
+class MyTextTheme{
+  MyTextTheme._();
   static TextTheme lightTextTheme = TextTheme(
     headlineLarge: TextStyle().copyWith(fontSize: 32.0,fontWeight: FontWeight.bold,color: Mycolors.dark),
     headlineMedium: TextStyle().copyWith(fontSize: 24.0,fontWeight: FontWeight.w600,color: Mycolors.dark),

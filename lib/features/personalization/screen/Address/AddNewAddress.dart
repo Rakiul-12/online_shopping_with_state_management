@@ -9,8 +9,8 @@ import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/validators/validations.dart';
 import '../../../../common/widgets/AppBar/CustomAppbar.dart';
 
-class addNewAddress extends StatelessWidget {
-  const addNewAddress({super.key});
+class addNewAddressScreen extends StatelessWidget {
+  const addNewAddressScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

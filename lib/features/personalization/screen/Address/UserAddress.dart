@@ -24,7 +24,7 @@ class UserAddress extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: (){
-            Get.to(()=>addNewAddress());
+            Get.to(()=>addNewAddressScreen());
           },
         backgroundColor: Mycolors.primary.withValues(alpha: .5) ,
         child: Icon(Iconsax.add,color: Mycolors.white,),
@@ -43,6 +43,7 @@ class UserAddress extends StatelessWidget {
 
                   List<AddressModel> addresses = snapshot.data!;
                   return ListView.separated(
+                      physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       separatorBuilder: (context, index) => SizedBox(height: Mysize.spaceBtwItems),
                       itemCount: addresses.length,

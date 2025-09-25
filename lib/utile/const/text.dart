@@ -12,7 +12,7 @@ class MyText{
   static const String onBoardingSubTitle3 = 'Get your favorite items delivered to your doorstep, anytime, anywhere';
 
   static const String onLogInScreenTitle = 'Shop Smarter';
-  static const String onLogInScreensubTitle = 'Log in to Access Exclusive Deals and Simplify Your Shopping Experience';
+  static const String OnLogInScreenSubTitle = 'Log in to Access Exclusive Deals and Simplify Your Shopping Experience';
   static const String onLogInScreenEmail = 'Email';
   static const String onLogInScreenPassword = 'Password';
   static const String onLogInScreenRemember = 'Remember Me';

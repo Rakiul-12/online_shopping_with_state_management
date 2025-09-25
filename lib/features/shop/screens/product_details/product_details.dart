@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:online_shop/common/widgets/Button/elevatedButton.dart';
 import 'package:online_shop/common/widgets/style/padding.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
+import 'package:online_shop/features/shop/controller/cart/cartController.dart';
 import 'package:online_shop/features/shop/models/productModel.dart';
 import 'package:online_shop/features/shop/screens/product_details/widgets/MyProductMetaDeta.dart';
 import 'package:online_shop/features/shop/screens/product_details/widgets/MyProductThumbnailSlider.dart';
@@ -35,7 +36,7 @@ class prodcut_details extends StatelessWidget {
                     SizedBox(height: Mysize.spaceBtwSections,),
                   ],
 
-                  MyElevatedButton(onPressed: (){}, child: Text("Checkout")),
+                  MyElevatedButton(onPressed: ()=> CartController.instance.checkout(product), child: Text("Checkout")),
                   SizedBox(height: Mysize.spaceBtwSections,),
                   MySectionHeading(title: "Description :",showActionBtn: false,),
                   SizedBox(height: Mysize.sm,),

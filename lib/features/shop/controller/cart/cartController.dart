@@ -9,6 +9,8 @@ import 'package:online_shop/utile/const/enums.dart';
 import 'package:online_shop/utile/const/keys.dart';
 import 'package:online_shop/utile/popup/snackbarHelpers.dart';
 
+import '../../screens/checkpOut/CheckOut.dart';
+
 class CartController extends GetxController{
   static CartController get instance => Get.find();
 
@@ -223,6 +225,47 @@ class CartController extends GetxController{
   }
 
 
+  // Direct checkout single product
+  Future<void> checkout(ProductModel product)async{
 
+    cartItems.clear();
+
+    // set quantity to 1 by default
+    productQuantityInCart.value = 1;
+
+    // check variation of product if it is variable product
+    if(product.productType == ProductType.variable.toString() && variationController.instance.selectedVariation.value.id.isEmpty){
+      MySnackBarHelpers.customToast(message: "Select Variation");
+      return;
+    }
+
+    // out of stock status
+    if(product.productType == ProductType.variable.toString()){
+      if(variationController.instance.selectedVariation.value.stock < 1){
+        MySnackBarHelpers.warningSnackBar(title: "Out of stock",message: "This variation is out of stock");
+        return;
+      }
+    }else{
+      if(product.stock < 1){
+        MySnackBarHelpers.warningSnackBar(title: "Out of stock",message: "This variation is out of stock");
+      }
+    }
+
+    // convert the productModel to cartModel  with given quantity
+    CartItemModel selectedCartItem = convertToCartItem(product, productQuantityInCart.value);
+
+    // add item to cart
+    cartItems.add(selectedCartItem);
+
+    // update cart totals
+    updateCartTotals();
+
+    // redirect to checkout screen
+    await Get.to(()=> CheckOutScreen());
+
+    // load previous cart item
+    loadCartItems();
+
+  }
 
 }

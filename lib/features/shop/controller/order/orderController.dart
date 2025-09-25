@@ -30,6 +30,13 @@ class OrderController extends GetxController{
       String UserId = AuthenticationRepository.instance.currentUser!.uid;
       if(UserId.isEmpty) return;
 
+      // check address is exist
+      if(AddressController.instance.selectedAddress.value.id.isEmpty){
+        MySnackBarHelpers.warningSnackBar(title: "Address not selected",message: "Please select address");
+        return;
+      }
+
+
       // create order model
       OrderModel order = OrderModel(
           id: UniqueKey().toString(),
@@ -64,7 +71,7 @@ class OrderController extends GetxController{
 
   Future<List<OrderModel>> fetchUserOrder()async{
     try{
-      final order = _OrderRepository.fetchUserOrder();
+      final order = await _OrderRepository.fetchUserOrder();
       return order;
 
     }catch(e){

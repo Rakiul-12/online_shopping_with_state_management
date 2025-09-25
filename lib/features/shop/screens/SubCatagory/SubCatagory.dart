@@ -31,61 +31,57 @@ class subCatagory extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: MyPadding.screenPadding,
-          child: Column(
-            children: [
-              FutureBuilder(
-                  future: controller.getSubCategory(category.id),
-                  builder: (context, snapshot) {
+          child: FutureBuilder(
+              future: controller.getSubCategory(category.id),
+              builder: (context, snapshot) {
 
-                    final loader = MyHorizontalProductShimmer();
-                    final widget = myCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot,loader: loader);
-                    if(widget != null) return widget;
-                    List<CategoryModel> subCategories = snapshot.data!;
-                    return ListView.builder(
-                      shrinkWrap: true,
-                        itemCount: subCategories.length,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                        CategoryModel subCategory = subCategories[index];
-                         return FutureBuilder(
-                             future: controller.getCategoryProducts(categoryId: subCategory.id),
-                             builder: (context, snapshot) {
+                final loader = MyHorizontalProductShimmer();
+                final widget = myCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot,loader: loader);
+                if(widget != null) return widget;
+                List<CategoryModel> subCategories = snapshot.data!;
+                return ListView.builder(
+                  shrinkWrap: true,
+                    itemCount: subCategories.length,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                    CategoryModel subCategory = subCategories[index];
+                     return FutureBuilder(
+                         future: controller.getCategoryProducts(categoryId: subCategory.id),
+                         builder: (context, snapshot) {
 
-                               final loader = MyHorizontalProductShimmer();
-                               final widget = myCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot,loader: loader);
-                               if(widget != null) return widget;
+                           final loader = MyHorizontalProductShimmer();
+                           final widget = myCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot,loader: loader);
+                           if(widget != null) return widget;
 
-                               List<ProductModel> products = snapshot.data!;
-                               return Column(
-                                 children: [
-                                   MySectionHeading(title:subCategory.name, onPressed: () =>
-                                       Get.to(()=>AllProdcuts(
-                                           title:subCategory.name,
-                                         futureMethod: controller.getCategoryProducts(categoryId: subCategory.id,limit: -1),
-                                       ))),
-                                   SizedBox(height: Mysize.spaceBtwItems / 2),
-                                   SizedBox(
-                                     height: 120,
-                                     child: ListView.separated(
-                                       scrollDirection: Axis.horizontal,
-                                       itemBuilder: (context, index) {
-                                         ProductModel product = products[index];
-                                         return NewCartProductHorizontal(product: product,);
-                                       },
-                                       itemCount: products.length,
-                                       separatorBuilder: (context, index) =>
-                                           SizedBox(width: Mysize.spaceBtwItems / 2,),
-                                     ),
-                                   ),
-                                 ],
-                               );
-                             },
-                         );
-                        },
-                    );
-                  },
-              )
-            ],
+                           List<ProductModel> products = snapshot.data!;
+                           return Column(
+                             children: [
+                               MySectionHeading(title:subCategory.name, onPressed: () =>
+                                   Get.to(()=>AllProdcuts(
+                                       title:subCategory.name,
+                                     futureMethod: controller.getCategoryProducts(categoryId: subCategory.id,limit: -1),
+                                   ))),
+                               SizedBox(height: Mysize.spaceBtwItems / 2),
+                               SizedBox(
+                                 height: 120,
+                                 child: ListView.separated(
+                                   scrollDirection: Axis.horizontal,
+                                   itemBuilder: (context, index) {
+                                     ProductModel product = products[index];
+                                     return NewCartProductHorizontal(product: product,);
+                                   },
+                                   itemCount: products.length,
+                                   separatorBuilder: (context, index) =>
+                                       SizedBox(width: Mysize.spaceBtwItems / 2,),
+                                 ),
+                               ),
+                             ],
+                           );
+                         },
+                     );
+                    },
+                );
+              },
           ),
         ),
       ),

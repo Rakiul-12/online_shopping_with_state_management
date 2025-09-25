@@ -51,8 +51,8 @@ class AuthenticationRepository extends GetxController {
 
       // check if user is first time
       LocalStorage.read("isFirstTime") != true
-          ? Get.to(() => logInScreen())
-          : Get.to(() => OnBoardingScreen());
+          ? Get.offAll(() => logInScreen())
+          : Get.offAll(() => OnBoardingScreen());
     }
 
   }

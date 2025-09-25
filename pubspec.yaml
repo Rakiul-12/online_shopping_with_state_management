@@ -76,8 +76,11 @@ dependencies:
   #intl:
   intl: ^0.20.2
 
-#  flutter_launcher_icons:
+  #flutter_launcher_icons:
   flutter_launcher_icons: ^0.14.4
+
+  #flutter_branch_sdk:
+  flutter_branch_sdk: ^8.9.0+1
 
 
 
@@ -116,10 +119,6 @@ flutter:
     - assets/fonts/
     - assets/animations/
     - assets/image/
-    - assets/icons/categories/
-    - assets/banners/
-    - assets/products/
-    - assets/brands/
     - assets/icons/payment_methods/
     - assets/appIcon/
 

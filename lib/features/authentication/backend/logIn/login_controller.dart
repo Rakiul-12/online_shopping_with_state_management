@@ -24,7 +24,6 @@ class loginController extends GetxController{
   }
 
 
-  final _userController = Get.put(userController());
   final email = TextEditingController();
   final pass = TextEditingController();
   RxBool showPass = true.obs;
@@ -90,7 +89,7 @@ class loginController extends GetxController{
       UserCredential userCredential = await AuthenticationRepository.instance.signInWithGoogle();
 
       // Save user record
-      await _userController.saveUserRecord(userCredential);
+      await  Get.put(userController()).saveUserRecord(userCredential);
       MyFullScreenLoader.stopLoading();
 
       AuthenticationRepository.instance.screenRedirect();

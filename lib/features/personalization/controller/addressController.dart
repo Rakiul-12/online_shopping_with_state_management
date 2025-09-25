@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:online_shop/common/widgets/Button/elevatedButton.dart';
 import 'package:online_shop/common/widgets/loader/circularLoader.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
 import 'package:online_shop/data/repository/address/addressRepository.dart';
 import 'package:online_shop/features/personalization/models/addressModel.dart';
+import 'package:online_shop/features/personalization/screen/Address/AddNewAddress.dart';
 import 'package:online_shop/features/personalization/screen/Address/widgets/MySingleAddress.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/helpers/NetworkManager.dart';
@@ -139,33 +141,45 @@ class AddressController extends GetxController {
 
   // function to show bottom sheet to select address
   Future<void> selectNewAddressBottomSheet(BuildContext context){
-    return showModalBottomSheet(context: context, builder: (context) => SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.all(Mysize.lg),
-        child: Column(
-          children: [
-            MySectionHeading(title: "Select Address",showActionBtn: false,),
-            SizedBox(height: Mysize.spaceBtwItems),
-            FutureBuilder(
-                future: getAllAddress(),
-                builder: (context, snapshot) {
-                  final widget = myCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot);
-                  if(widget != null) return widget;
-                  return ListView.separated(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      separatorBuilder: (context, index) => SizedBox(height: Mysize.spaceBtwItems),
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) => MySingleAddress(address: snapshot.data![index], onTap: (){
-                        selectedAddress(snapshot.data![index]);
-                        Get.back();
-                      }),
-                  );
-                },
-            )
-          ],
+    return showModalBottomSheet(context: context, builder: (context) => Stack(
+      children: [
+        SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(Mysize.lg),
+            child: Column(
+              children: [
+                MySectionHeading(title: "Select Address",showActionBtn: false,),
+                SizedBox(height: Mysize.spaceBtwItems),
+                FutureBuilder(
+                    future: getAllAddress(),
+                    builder: (context, snapshot) {
+                      final widget = myCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot);
+                      if(widget != null) return widget;
+                      return ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          separatorBuilder: (context, index) => SizedBox(height: Mysize.spaceBtwItems),
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) => MySingleAddress(address: snapshot.data![index], onTap: (){
+                            selectAddress(snapshot.data![index]);
+                            Get.back();
+                          }),
+                      );
+                    },
+                ),
+                SizedBox(height: Mysize.spaceBtwSections)
+              ],
+            ),
+          ),
         ),
-      ),
+        
+        Positioned(
+          bottom: Mysize.defaultSpace,
+          right: Mysize.defaultSpace * 2,
+          left: Mysize.defaultSpace * 2,
+            child: MyElevatedButton(onPressed: ()=> Get.to(()=> addNewAddressScreen()) , child: Text("Add New Address"))
+        )
+      ],
     ),);
   }
 

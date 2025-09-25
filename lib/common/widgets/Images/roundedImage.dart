@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utile/const/sizes.dart';
@@ -29,7 +30,6 @@ class MyRoundedImge extends StatelessWidget {
   final VoidCallback? onPressed;
   final double borderRadius;
 
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -47,12 +47,12 @@ class MyRoundedImge extends StatelessWidget {
           borderRadius: ApplyImageRadius
               ? BorderRadius.circular(borderRadius)
               : BorderRadius.zero,
-          child: Image(
-            image: isNetworkImage
-                ? NetworkImage(imageUrl)
-                : AssetImage(imageUrl),
-            fit: fit,
-          ),
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                )
+              : Image(image: AssetImage(imageUrl), fit: fit),
         ),
       ),
     );

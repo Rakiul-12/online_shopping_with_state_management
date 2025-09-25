@@ -14,7 +14,7 @@ class MylogInHeader extends StatelessWidget {
       children: [
         Text(MyText.onLogInScreenTitle,style: Theme.of(context).textTheme.headlineMedium,),
         SizedBox(height: Mysize.sm,),
-        Text(MyText.onLogInScreensubTitle,style: Theme.of(context).textTheme.bodyMedium,),
+        Text(MyText.OnLogInScreenSubTitle,style: Theme.of(context).textTheme.bodyMedium,),
       ],
     );
   }
