@@ -26,4 +26,8 @@ class MyKeys{
   static String bannerFolder ="Banner folder";
   static String brandFolder ="Brand folder";
   static String productFolder ="Product folder";
+
+
+  static String stripeSecretKey ="sk_test_51SBDtBC6HgJTGOLz92bAl7e4PeuYNLmWle86QpGcy5bBzbZymuLG7POCSLkwnO4qUVhiJUJH4ctMWaamQRgL4AxI00hw15iLPy";
+  static String stripePublishableKey ="pk_test_51SBDtBC6HgJTGOLzOr0obXoh3UJEynmUgdXcme2P29riymTTSQ6igxT8BzKJ96C2VqleNcyhVFBnAyHtd3nnHG5I0058yBgsFj";
 }

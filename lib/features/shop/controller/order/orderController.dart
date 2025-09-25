@@ -16,8 +16,7 @@ import '../../../../utile/const/image.dart';
 class OrderController extends GetxController{
   static OrderController get instance => Get.find();
 
-  final cartController = CartController.instance;
-  final checkOutController = CheckOutController.instance;
+  final cartController = Get.put(CartController());
   final addressController = Get.put(AddressController());
   final _OrderRepository = Get.put(OrderRepository());
 
@@ -36,6 +35,8 @@ class OrderController extends GetxController{
         return;
       }
 
+
+      final checkOutController = CheckOutController.instance;
 
       // create order model
       OrderModel order = OrderModel(

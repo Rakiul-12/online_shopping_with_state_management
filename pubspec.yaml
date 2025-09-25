@@ -82,6 +82,9 @@ dependencies:
   #flutter_branch_sdk:
   flutter_branch_sdk: ^8.9.0+1
 
+  #flutter_stripe:
+  flutter_stripe: ^12.0.2
+
 
 
 

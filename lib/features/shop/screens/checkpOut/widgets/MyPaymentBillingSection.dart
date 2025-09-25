@@ -14,7 +14,7 @@ class MyPaymentBillingSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = MyHelperFunction.isDarkMode(context);
-    final controller = Get.put(CheckOutController());
+    final controller = CheckOutController.instance;
     return Column(
       children: [
         MySectionHeading(
