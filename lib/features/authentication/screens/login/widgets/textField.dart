@@ -15,7 +15,7 @@ class form_filed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = loginController.instance;
+    final controller = LoginController.instance;
     return Form(
       key: controller.loginFormKey,
       child: Column(

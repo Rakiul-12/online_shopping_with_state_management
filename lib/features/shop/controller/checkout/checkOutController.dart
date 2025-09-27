@@ -4,13 +4,15 @@ import 'package:get/get.dart';
 import 'package:online_shop/common/widgets/text/sectionHeading.dart';
 import 'package:online_shop/data/service/stripeServices.dart';
 import 'package:online_shop/features/shop/controller/order/orderController.dart';
+import 'package:online_shop/features/shop/controller/promoCode/PromoCodeController.dart';
 import 'package:online_shop/features/shop/models/paymentMethodModel.dart';
 import 'package:online_shop/utile/const/enums.dart';
 import 'package:online_shop/utile/const/image.dart';
 import 'package:online_shop/utile/const/sizes.dart';
 import 'package:online_shop/utile/popup/snackbarHelpers.dart';
-
 import '../../screens/checkpOut/widgets/paymentTile.dart';
+
+
 
 class CheckOutController extends GetxController{
   static CheckOutController get instance => Get.find();
@@ -18,6 +20,7 @@ class CheckOutController extends GetxController{
   Rx<PaymentMethodModel> selectedPaymentMethod = PaymentMethodModel.empty().obs;
   final _orderController = Get.put(OrderController());
   final _striperService = Get.put(StripeService());
+  final _promoCodeController = Get.put(PromoCodeController());
   RxBool isPaymentProcessing = false.obs;
 
   @override
@@ -66,16 +69,19 @@ class CheckOutController extends GetxController{
       }
       isPaymentProcessing.value=false;
 
+      // process order
       await _orderController.processOrder(totalAmount);
 
+      // decrease no of promo code
+      await _promoCodeController.decreaseNoOfPromoCode();
 
+      // add user to promo code
+      await _promoCodeController.addUserToPromoCode();
 
     }catch(e){
       isPaymentProcessing.value=false;
       MySnackBarHelpers.errorSnackBar(title: "Failed!",message: e.toString());
     }
-
-
   }
 
 }

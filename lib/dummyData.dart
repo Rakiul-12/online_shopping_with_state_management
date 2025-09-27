@@ -1,13 +1,16 @@
 import 'package:online_shop/features/shop/models/banners_model.dart';
 import 'package:online_shop/features/shop/models/brandModel.dart';
 import 'package:online_shop/routes/routes.dart';
+import 'package:online_shop/utile/const/enums.dart';
 import 'package:online_shop/utile/const/image.dart';
+import 'package:online_shop/utile/const/text.dart';
 import 'features/shop/models/brandCategoryModel.dart';
 import 'features/shop/models/catagoryModel.dart';
 import 'features/shop/models/productAttributeModel.dart';
 import 'features/shop/models/productCategoryModel.dart';
 import 'features/shop/models/productModel.dart';
 import 'features/shop/models/productVariationModel.dart';
+import 'features/shop/models/promoCodeModel.dart';
 
 class MyDummyData {
   /// List of all Banners
@@ -1777,5 +1780,127 @@ class MyDummyData {
     ProductCategoryModel(categoryId: '23', productId: '2'),
   ];
 
+  // promo code
+  static final List<PromoCodeModel> promoCodes = [
+    PromoCodeModel(
+        id: '1',
+        code: 'WELCOME10',
+        name: 'Welcome Offer',
+        discount: 10,
+        discountType: DiscountType.percentage,
+        startDate: DateTime.now(),
+        endDate: DateTime.now().add(Duration(days: 30)),
+        isActive: true,
+        minOrderPrice: 1000,
+        noOfPromoCodes: 100),
+    PromoCodeModel(
+      id: '2',
+      code: 'FLAT50',
+      name: 'Flat ${MyText.currency}50 Off',
+      discount: 50,
+      discountType: DiscountType.fixed,
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(Duration(days: 10)),
+      isActive: true,
+      minOrderPrice: 500,
+      noOfPromoCodes: 50,
+    ),
+    PromoCodeModel(
+      id: '3',
+      code: 'SUMMER20',
+      name: 'Summer Special 20% Off',
+      discount: 20,
+      discountType: DiscountType.percentage,
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(Duration(days: 20)),
+      isActive: true,
+      minOrderPrice: 1200,
+      noOfPromoCodes: 200,
+    ),
+    PromoCodeModel(
+      id: '4',
+      code: 'FIRSTORDER',
+      name: 'First Order Bonus',
+      discount: 30,
+      discountType: DiscountType.fixed,
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(Duration(days: 15)),
+      isActive: true,
+      minOrderPrice: 800,
+      noOfPromoCodes: 75,
+    ),
+    PromoCodeModel(
+      id: '5',
+      code: 'FLASH15',
+      name: 'Flash Sale 15% Off',
+      discount: 15,
+      discountType: DiscountType.percentage,
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(Duration(days: 5)),
+      isActive: true,
+      minOrderPrice: 1500,
+      noOfPromoCodes: 30,
+    ),
+    PromoCodeModel(
+      id: '6',
+      code: 'BIGSAVE100',
+      name: 'Big Save ${MyText.currency}100 Off',
+      discount: 100,
+      discountType: DiscountType.fixed,
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(Duration(days: 45)),
+      isActive: true,
+      minOrderPrice: 3000,
+      noOfPromoCodes: 120,
+    ),
+    PromoCodeModel(
+      id: '7',
+      code: 'FREESHIP',
+      name: 'Free Shipping',
+      discount: 5,
+      discountType: DiscountType.percentage,
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(Duration(days: 90)),
+      isActive: true,
+      minOrderPrice: 0,
+      noOfPromoCodes: 999,
+    ),
+    PromoCodeModel(
+      id: '8',
+      code: 'NEWYEAR25',
+      name: 'New Year 25% Off',
+      discount: 25,
+      discountType: DiscountType.percentage,
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(Duration(days: 60)),
+      isActive: true,
+      minOrderPrice: 2000,
+      noOfPromoCodes: 80,
+    ),
+    PromoCodeModel(
+      id: '9',
+      code: 'DIWALI500',
+      name: 'Diwali Mega ${MyText.currency}500 Off',
+      discount: 500,
+      discountType: DiscountType.fixed,
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(Duration(days: 25)),
+      isActive: true,
+      minOrderPrice: 3500,
+      noOfPromoCodes: 40,
+    ),
+    PromoCodeModel(
+      id: '10',
+      code: 'SAVE70',
+      name: 'Save ${MyText.currency}70 Instantly',
+      discount: 70,
+      discountType: DiscountType.fixed,
+      startDate: DateTime.now().subtract(Duration(days: 2)),
+      endDate: DateTime.now().subtract(Duration(days: 1)),
+      isActive: true,
+      minOrderPrice: 1000,
+      noOfPromoCodes: 70,
+    ),
+  ];
 
 }

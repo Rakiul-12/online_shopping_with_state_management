@@ -1,13 +1,14 @@
 class MyKeys{
   MyKeys._();
 
-  static String userCollection = "Users";
+
   static String cartItemsKey = "cartItems";
   static String rememberMeEmail = "rememberemail";
   static String rememberMePass = "rememberpass";
+
+
+  static String userCollection = "Users";
   static String orderCollection = "Orders";
-
-
   static String categoriesCollection ="Categories";
   static String bannersCollection ="Banners";
   static String brandCollection ="Brands";
@@ -15,6 +16,7 @@ class MyKeys{
   static String productCategoryCollection ="productCategoryCollection";
   static String brandCategoryCollection ="brandCategoryCollection";
   static String addressCollection ="UserAddress";
+  static String promoCodeCollection ="PromoCodes";
 
   static String cloudName ="diumcbq4a";
   static String uploadPreset ="upload_image";
@@ -28,7 +30,7 @@ class MyKeys{
   static String productFolder ="Product folder";
 
 
-  static String stripeSecretKey ="user strive test secret key";
-  static String stripePublishableKey ="user strive test publish key";
+  static String stripeSecretKey ="";
+  static String stripePublishableKey ="";
 }
 

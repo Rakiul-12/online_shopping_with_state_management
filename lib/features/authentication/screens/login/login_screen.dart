@@ -14,7 +14,7 @@ class logInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(loginController());
+    Get.put(LoginController());
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(

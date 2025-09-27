@@ -8,7 +8,6 @@ import 'package:online_shop/features/shop/models/productVariationModel.dart';
 import 'package:online_shop/utile/const/enums.dart';
 import 'package:online_shop/utile/const/keys.dart';
 import 'package:online_shop/utile/popup/snackbarHelpers.dart';
-
 import '../../screens/checkpOut/CheckOut.dart';
 
 class CartController extends GetxController{
@@ -23,8 +22,12 @@ class CartController extends GetxController{
   final VariationController = variationController.instance;
 
 
+
+
+
+
   // for see the already buy items
-  CartController(){
+  CartController() {
     loadCartItems();
   }
 

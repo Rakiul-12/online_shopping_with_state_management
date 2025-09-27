@@ -9,19 +9,8 @@ import 'package:online_shop/utile/helpers/NetworkManager.dart';
 import 'package:online_shop/utile/popup/fullScreenLoader.dart';
 import 'package:online_shop/utile/popup/snackbarHelpers.dart';
 
-class loginController extends GetxController{
-  static loginController get instance => Get.find();
-
-
-  @override
-  void onInit() {
-    // show the email and pass on the login page
-    email.text = localStorage.read(MyKeys.rememberMeEmail) ?? "";
-
-    pass.text = localStorage.read(MyKeys.rememberMePass) ?? "";
-
-    super.onInit();
-  }
+class LoginController extends GetxController{
+  static LoginController get instance => Get.find();
 
 
   final email = TextEditingController();
@@ -29,9 +18,16 @@ class loginController extends GetxController{
   RxBool showPass = true.obs;
   RxBool CheckRememberMe = false.obs;
   final loginFormKey = GlobalKey<FormState>();
-
   final localStorage = GetStorage();
 
+
+  @override
+  void onInit() {
+    // show the email and pass on the login page
+    email.text = localStorage.read(MyKeys.rememberMeEmail) ?? "";
+    pass.text = localStorage.read(MyKeys.rememberMePass) ?? "";
+    super.onInit();
+  }
 
   // logInUserWithEmailAndPass
   Future<void>logInWithEmailAndPass()async{
@@ -90,6 +86,7 @@ class loginController extends GetxController{
 
       // Save user record
       await  Get.put(userController()).saveUserRecord(userCredential);
+
       MyFullScreenLoader.stopLoading();
 
       AuthenticationRepository.instance.screenRedirect();
